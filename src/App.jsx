@@ -13,11 +13,9 @@ import PopUser from "./components/popups/PopUser";
 function App() {
   return (
     <div className="wrapper">
-      {/*pop-up start*/}
       <PopUser />
       <PopNewCard />
       <PopBrowse />
-      {/*} pop-up end*/}
       <Header />
       <Main />
     </div>
