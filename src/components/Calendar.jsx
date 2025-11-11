@@ -76,14 +76,8 @@ const Calendar = () => {
             <div className="calendar__cell _other-month _weekend">1</div>
           </div>
         </div>
-
         <input type="hidden" id="datepick_value" value="08.09.2023"></input>
-        <div className="calendar__period">
-          <p className="calendar__p date-end">
-            Срок исполнения: <span className="date-control"></span>.
-            <span className="date-control"></span>.
-          </p>
-        </div>
+        Срок исполнения:
       </div>
     </div>
   );
