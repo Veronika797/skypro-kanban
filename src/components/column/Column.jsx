@@ -1,5 +1,4 @@
-import Card from "./Card";
-import React from "react";
+import Card from "../card/Card";
 
 const Column = ({ title, cards }) => {
   return (
