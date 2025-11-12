@@ -1,5 +1,3 @@
-import React from "react";
-
 const Card = ({ index, card }) => {
   if (!card) {
     return null;
@@ -10,7 +8,7 @@ const Card = ({ index, card }) => {
       <div className={`cards__card card ${card.theme}`}>
         <div className="card__group">
           <div className={`card__theme ${card.theme}`}>
-            <p className="theme-text">{card.status}</p>
+            <p className="theme-text">{card.category}</p>
           </div>
           <a href="#popBrowse" target="_self">
             <div className="card__btn">
@@ -28,24 +26,20 @@ const Card = ({ index, card }) => {
           <div className="card__date">
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              width="13"
-              height="13"
-              viewBox="0 0 13 13"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
               fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="lucide lucide-calendar-icon lucide-calendar"
             >
-              <g clipPath="url(#clip0_1_415)">
-                <path
-                  d="M10.5625 2.03125H2.4375C1.7644 2.03125 1.21875 2.5769 1.21875 3.25V10.5625C1.21875 11.2356 1.7644 11.7812 2.4375 11.7812H10.5625C11.2356 11.7812 11.7812 11.2356 11.7812 10.5625V3.25C11.7812 2.5769 11.2356 2.03125 10.5625 2.03125Z"
-                  stroke="#94A6BE"
-                  strokeWidth="0.8"
-                  strokeLinejoin="round"
-                />
-              </g>
-              <defs>
-                <clipPath id="clip0_1_415">
-                  <rect width="13" height="13" fill="white" />
-                </clipPath>
-              </defs>
+              <path d="M8 2v4" />
+              <path d="M16 2v4" />
+              <rect width="18" height="18" x="3" y="4" rx="2" />
+              <path d="M3 10h18" />
             </svg>
             <p>{new Date().toLocaleDateString()}</p>
           </div>

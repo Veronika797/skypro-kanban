@@ -1,14 +1,9 @@
-{
-  // import { useState } from "react";
-  // import reactLogo from "./assets/react.svg";
-  // import viteLogo from "/vite.svg";
-}
 import "./App.css";
-import Header from "./components/Header";
-import Main from "./components/Main";
-import PopBrowse from "./components/popups/PopBrowse";
-import PopNewCard from "./components/popups/PopNewCard";
-import PopUser from "./components/popups/PopUser";
+import Header from "./components/header/Header";
+import Main from "./components/main/Main";
+import PopBrowse from "./components/popups/browse/PopBrowse";
+import PopNewCard from "./components/popups/newCard/PopNewCard";
+import PopUser from "./components/popups/user/PopUser";
 
 function App() {
   return (
