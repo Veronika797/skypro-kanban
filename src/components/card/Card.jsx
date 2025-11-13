@@ -1,14 +1,14 @@
-const Card = ({ index, card }) => {
+const Card = ({ id, card }) => {
   if (!card) {
     return null;
   }
 
   return (
-    <div className="cards__item" key={index}>
+    <div className="cards__item" key={id}>
       <div className={`cards__card card ${card.theme}`}>
         <div className="card__group">
           <div className={`card__theme ${card.theme}`}>
-            <p className="theme-text">{card.category}</p>
+            <p className="theme-text">{card.topic}</p>
           </div>
           <a href="#popBrowse" target="_self">
             <div className="card__btn">
@@ -41,7 +41,7 @@ const Card = ({ index, card }) => {
               <rect width="18" height="18" x="3" y="4" rx="2" />
               <path d="M3 10h18" />
             </svg>
-            <p>{new Date().toLocaleDateString()}</p>
+            <p>{card.date}</p>
           </div>
         </div>
       </div>

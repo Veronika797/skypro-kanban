@@ -270,6 +270,11 @@ body {
   justify-content: space-between;
 }
 
+.pop-user-set-close {
+  position: relative;
+  font-size: 20px;
+  left: 100%;
+}
 .pop-user-set__name {
   color: #000;
   font-size: 14px;
@@ -323,7 +328,7 @@ body {
   left: 12px;
 }
 .pop-user-set button {
-  width: 72px;
+  width: 172px;
   height: 30px;
   background: transparent;
   color: #565eef;
@@ -577,9 +582,11 @@ body {
 }
 .categories__themes {
   display: flex;
-  flex-wrap: nowrap;
+  /* flex-wrap: nowrap; */
   align-items: flex-start;
   justify-content: flex-start;
+  flex-wrap: wrap;
+  gap: 6px;
 }
 .categories__p {
   margin-bottom: 14px;
@@ -851,8 +858,8 @@ body {
   border: 0.7px solid rgba(148, 166, 190, 0.4);
   background: #fff;
   box-shadow: 0px 10px 39px 0px rgba(26, 56, 101, 0.21);
-  padding: 34px;
-  text-align: center;
+  padding: 22px;
+  text-align: start;
   z-index: 2;
 }
 
