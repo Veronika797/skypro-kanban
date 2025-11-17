@@ -7,9 +7,11 @@ const Column = ({ title, cards }) => {
         <p>{title}</p>
       </div>
       <div className="cards">
-        {cards.map((card, id) => (
-          <Card key={id} index={id} card={card} />
-        ))}
+        {Array.isArray(cards) && cards.length > 0 ? (
+          cards.map((card, id) => <Card key={id} index={id} card={card} />)
+        ) : (
+          <p>Нет доступных карточек</p>
+        )}
       </div>
     </div>
   );

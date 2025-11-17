@@ -1,3 +1,5 @@
+// import style from "./Card.module.css";
+
 const Card = ({ id, card }) => {
   if (!card) {
     return null;
