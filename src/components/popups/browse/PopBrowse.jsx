@@ -1,4 +1,4 @@
-const PopBrowse = () => {
+const PopBrowse = ({ description }) => {
   return (
     <div className="pop-browse" id="popBrowse">
       <div className="pop-browse__container">
@@ -46,7 +46,9 @@ const PopBrowse = () => {
                     id="textArea01"
                     readOnly
                     placeholder="Введите описание задачи..."
-                  ></textarea>
+                  >
+                    {description}
+                  </textarea>
                 </div>
               </form>
               <div className="pop-new-card__calendar calendar">

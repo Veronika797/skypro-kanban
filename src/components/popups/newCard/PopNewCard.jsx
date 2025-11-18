@@ -167,5 +167,4 @@ const PopNewCard = () => {
     </div>
   );
 };
-
 export default PopNewCard;
