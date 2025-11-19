@@ -1,0 +1,80 @@
+.skeleton__cards {
+  padding: 10%;
+  width: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.skeleton__card {
+  width: 270px;
+  height: 159px;
+  border-radius: 24px;
+  border-width: 1px;
+  padding: 20px;
+  background-color: rgba(217, 217, 217, 1);
+  border: 1px solid rgba(16, 16, 16, 1);
+}
+
+.skeleton__cards__card {
+  display: contents;
+}
+
+.skeleton__card__group {
+  width: 230px;
+  height: 30px;
+  border-radius: 50px;
+  background: rgba(177, 177, 177, 1);
+}
+
+.skeleton__card__theme,
+.skeleton__theme__text {
+  display: none;
+}
+
+.skeleton__card__btn {
+  background-color: rgba(217, 217, 217, 1);
+  border: 1px solid rgba(16, 16, 16, 1);
+}
+
+.skeleton__card__content {
+  width: 164px;
+  border-radius: 50px;
+  background: rgba(177, 177, 177, 1);
+}
+
+.skeleton__card__title,
+.skeleton__card__description {
+  display: none;
+}
+
+.skeleton__card__date {
+  width: 81px;
+  height: 15px;
+  gap: 10px;
+  border-radius: 50px;
+  background-color: rgba(177, 177, 177, 1);
+}
+
+.skeleton__card__date svg,
+.skeleton__card__date p {
+  display: none;
+}
+
+/* .skeleton__card {
+  width: 270px;
+  height: 159px;
+  border-radius: 24px;
+  background-color: rgba(217, 217, 217, 0.5);
+  margin: 10px;
+}
+
+.skeleton__card__group,
+.skeleton__card__title,
+.skeleton__card__description,
+.skeleton__card__date {
+  background: rgba(177, 177, 177, 0.8);
+  margin: 5px 0;
+} */

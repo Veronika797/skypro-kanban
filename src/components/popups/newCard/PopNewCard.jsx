@@ -148,13 +148,22 @@ const PopNewCard = () => {
               <p className="categories__p subttl">Категория</p>
               <div className="categories__themes">
                 <div className="categories__theme _orange _active-category">
-                  <p className="_orange">Web Design</p>
+                  <p className="_orange">Учеба</p>
                 </div>
                 <div className="categories__theme _green">
-                  <p className="_green">Research</p>
+                  <p className="_green">Здоровье</p>
                 </div>
                 <div className="categories__theme _purple">
-                  <p className="_purple">Copywriting</p>
+                  <p className="_purple">Отдых</p>
+                </div>
+                <div className="categories__theme _blue _active-category">
+                  <p className="_blue">Спорт</p>
+                </div>
+                <div className="categories__theme _pink">
+                  <p className="_pink">Проект</p>
+                </div>
+                <div className="categories__theme _yellow">
+                  <p className="_yellow">Путешествия</p>
                 </div>
               </div>
             </div>
