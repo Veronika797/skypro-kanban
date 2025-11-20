@@ -47,7 +47,7 @@ function App() {
       ) : (
         <>
           <Header />
-          <Main loading={loading} />
+          <Main />
           {/* <Loader cards={cards} showSkeleton={showSkeleton} /> */}
         </>
       )}

@@ -1,4 +1,15 @@
-// import style from "./Card.module.css";
+import {
+  CardsContainer,
+  CardContainer,
+  Group,
+  Theme,
+  Text,
+  Button,
+  Title,
+  Description,
+  Content,
+  DateContainer,
+} from "./Card.styled";
 
 const Card = ({ id, card }) => {
   if (!card) {
@@ -6,26 +17,24 @@ const Card = ({ id, card }) => {
   }
 
   return (
-    <div className="cards__item" key={id}>
-      <div className={`cards__card card ${card.theme}`}>
-        <div className="card__group">
-          <div className={`card__theme ${card.theme}`}>
-            <p className="theme-text">{card.topic}</p>
-          </div>
-          <a href="#popBrowse" target="_self">
-            <div className="card__btn">
-              <div></div>
-              <div></div>
-              <div></div>
-            </div>
-          </a>
-        </div>
-        <div className="card__content">
+    <CardsContainer key={id}>
+      <CardContainer className={`theme${card.theme}`}>
+        <Group>
+          <Theme className={card.theme}>
+            <Text>{card.topic}</Text>
+          </Theme>
+          <Button href="#popBrowse" target="_self">
+            <div></div>
+            <div></div>
+            <div></div>
+          </Button>
+        </Group>
+        <Content>
           <a href="" target="_blank">
-            <h3 className="card__title">{card.title}</h3>
+            <Title>{card.title}</Title>
           </a>
-          <p className="card__description">{card.description}</p>
-          <div className="card__date">
+          <Description>{card.description}</Description>
+          <DateContainer>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="24"
@@ -44,10 +53,10 @@ const Card = ({ id, card }) => {
               <path d="M3 10h18" />
             </svg>
             <p>{card.date}</p>
-          </div>
-        </div>
-      </div>
-    </div>
+          </DateContainer>
+        </Content>
+      </CardContainer>
+    </CardsContainer>
   );
 };
 
