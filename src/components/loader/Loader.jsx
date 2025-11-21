@@ -1,36 +1,36 @@
-import style from "./Loader.module.css";
-import Card from "../card/Card";
-import Column from "../column/Column";
-import { columnsData } from "../../data";
-import Skeleton from "../skeleton/Skeleton";
+// import style from "./Loader.styled.js";
 
-const Loader = ({ showSkeleton, cards }) => {
-  return (
-    <div className={style.columns}>
-      {columnsData.map((column, index) => {
-        const filteredCards =
-          column.status === "без статуса"
-            ? cards.filter((card) => card.status === "без статуса")
-            : cards.filter((card) => card.status === column.status);
+// // import Column from "../column/Column";
+// import { columnsData } from "../../data";
+// import Card from "../Card/Card.jsx";
 
-        return (
-          <Card key={index} title={column.title}>
-            {showSkeleton ? (
-              // showSkeleton = true
-              <>
-                <Skeleton />
-                <Skeleton />
-                <Skeleton />
-              </>
-            ) : (
-              // showSkeleton = false
-              filteredCards.map((card) => <Card key={card.id} card={card} />)
-            )}
-          </Card>
-        );
-      })}
-    </div>
-  );
-};
+// const Loader = ({ showSkeleton, cards }) => {
+//   return (
+//     <div className={style.columns}>
+//       {columnsData.map((column, index) => {
+//         const filteredCards =
+//           column.status === "без статуса"
+//             ? cards.filter((card) => card.status === "без статуса")
+//             : cards.filter((card) => card.status === column.status);
 
-export default Loader;
+//         return (
+//           <Card key={index} title={column.title}>
+//             {showSkeleton ? (
+//               // showSkeleton = true
+//               <>
+//                 <Skeleton />
+//                 <Skeleton />
+//                 <Skeleton />
+//               </>
+//             ) : (
+//               // showSkeleton = false
+//               filteredCards.map((card) => <Card key={card.id} card={card} />)
+//             )}
+//           </Card>
+//         );
+//       })}
+//     </div>
+//   );
+// };
+
+// export default Loader;

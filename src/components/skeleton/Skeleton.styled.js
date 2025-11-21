@@ -1,4 +1,6 @@
-.skeleton__cards {
+import styled from "styled-components";
+
+export const Cards = styled.div`
   padding: 10%;
   width: 100%;
   position: relative;
@@ -6,9 +8,9 @@
   flex-direction: row;
   gap: 10px;
   flex-wrap: wrap;
-}
+`;
 
-.skeleton__card {
+export const Card = styled.div`
   width: 270px;
   height: 159px;
   border-radius: 24px;
@@ -16,52 +18,60 @@
   padding: 20px;
   background-color: rgba(217, 217, 217, 1);
   border: 1px solid rgba(16, 16, 16, 1);
-}
-
-.skeleton__cards__card {
+`;
+export const CardsCard = styled.div`
   display: contents;
-}
+`;
 
-.skeleton__card__group {
+export const Group = styled.div`
   width: 230px;
   height: 30px;
   border-radius: 50px;
   background: rgba(177, 177, 177, 1);
-}
+`;
 
-.skeleton__card__theme,
-.skeleton__theme__text {
+export const Theme = styled.div`
   display: none;
-}
 
-.skeleton__card__btn {
+  p {
+    display: none;
+  }
+`;
+
+export const Button = styled.button`
   background-color: rgba(217, 217, 217, 1);
   border: 1px solid rgba(16, 16, 16, 1);
-}
+`;
 
-.skeleton__card__content {
+export const Content = styled.div`
   width: 164px;
   border-radius: 50px;
   background: rgba(177, 177, 177, 1);
-}
+`;
 
-.skeleton__card__title,
-.skeleton__card__description {
+export const Title = styled.div`
   display: none;
-}
+`;
 
-.skeleton__card__date {
+export const Description = styled.div`
+  display: none;
+`;
+
+export const Date = styled.div`
   width: 81px;
   height: 15px;
   gap: 10px;
   border-radius: 50px;
   background-color: rgba(177, 177, 177, 1);
-}
 
-.skeleton__card__date svg,
-.skeleton__card__date p {
-  display: none;
-}
+  p {
+    display: none;
+  }
+
+  svg {
+    display: none;
+  }
+`;
 
 /* .skeleton__card {
   width: 270px;

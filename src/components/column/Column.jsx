@@ -1,19 +1,20 @@
-import Card from "../card/Card";
+import Card from "../Card/Card.jsx";
+import { Col, Name, Crds } from "./Column.styled.js";
 
 const Column = ({ title, cards }) => {
   return (
-    <div className="main__column">
-      <div className="column__title">
+    <Col>
+      <Name>
         <p>{title}</p>
-      </div>
-      <div className="cards">
+      </Name>
+      <Crds>
         {Array.isArray(cards) && cards.length > 0 ? (
           cards.map((card, id) => <Card key={id} index={id} card={card} />)
         ) : (
           <p>Нет доступных карточек</p>
         )}
-      </div>
-    </div>
+      </Crds>
+    </Col>
   );
 };
 
