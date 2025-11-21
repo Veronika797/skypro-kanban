@@ -1,13 +1,14 @@
-import Column from "../column/Column";
+import Column from "../Column/Column";
 import { allCards, columnsData } from "../../data";
+import { Block, Columns, Container, Content, MainContent } from "./Main.styled";
 
 const Main = () => {
   return (
-    <main className="main">
-      <div className="container">
-        <div className="main__block">
-          <div className="main__content">
-            <div className="columns">
+    <MainContent>
+      <Container>
+        <Block>
+          <Content>
+            <Columns>
               {columnsData.map((column, index) => {
                 const filteredCards =
                   column.status === "без статуса"
@@ -22,11 +23,11 @@ const Main = () => {
                   />
                 );
               })}
-            </div>
-          </div>
-        </div>
-      </div>
-    </main>
+            </Columns>
+          </Content>
+        </Block>
+      </Container>
+    </MainContent>
   );
 };
 

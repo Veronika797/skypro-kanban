@@ -1,4 +1,4 @@
-import Card from "../card/Card";
+import Card from "../Card/Card.jsx";
 import { Col, Name, Crds } from "./Column.styled.js";
 
 const Column = ({ title, cards }) => {

@@ -11,17 +11,44 @@ const cardAnimation = keyframes`
   }
 `;
 
-export const CardsContainer = styled.div`
-  width: 100%;
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+export const themeColors = {
+  _orange: {
+    backgroundColor: "#ffe4c2",
+    color: "#ff6d00",
+  },
+  _pink: {
+    backgroundColor: "#fbafe4",
+    color: "#f432e4",
+  },
+  _yellow: {
+    backgroundColor: "#fbfb0e",
+    color: "#9ea303",
+  },
+  _green: {
+    backgroundColor: "#b4fdd1",
+    color: "#06b16e",
+  },
+  _purple: {
+    backgroundColor: "#e9d4ff",
+    color: "#9a48f1",
+  },
+  _blue: {
+    backgroundColor: "#7dc1f8",
+    color: "#0072cb",
+  },
+};
 
-  @media screen and (max-width: 1200px) {
-    width: 230px;
-  }
-`;
+// export const CardsContainer = styled.div`
+//   width: 100%;
+//   position: relative;
+//   display: flex;
+//   flex-direction: column;
+//   gap: 10px;
+
+//   @media screen and (max-width: 1200px) {
+//     width: 230px;
+//   }
+// `;
 
 export const CardContainer = styled.div`
   width: 220px;
@@ -50,6 +77,17 @@ export const Theme = styled.div`
   height: 20px;
   padding: 5px 14px;
   border-radius: 18px;
+
+  ${({ theme }) =>
+    theme && themeColors[theme]
+      ? `
+  background-color: ${themeColors[theme].backgroundColor};
+  color: ${themeColors[theme].color};
+  `
+      : `
+    background-color: #ffffff;
+    color: #000000;
+  `}
 `;
 
 export const Text = styled.p`

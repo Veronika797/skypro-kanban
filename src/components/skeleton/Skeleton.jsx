@@ -1,27 +1,37 @@
-import style from "./Skeleton.module.css";
+import {
+  Button,
+  Card,
+  Cards,
+  CardsCard,
+  Content,
+  Description,
+  Group,
+  Theme,
+  Title,
+} from "./Skeleton.styled";
 
 const Skeleton = () => {
   return (
-    <div className={style.skeleton__cards}>
-      <div className={style.skeleton__card}>
-        <div className={style.skeleton__cards__card}>
-          <div className={style.skeleton__card__group}>
-            <div className={style.skeleton__card__theme}>
-              <p className={style.skeleton__theme__text}></p>
-            </div>
-            <div className={style.skeleton__card__btn}></div>
-          </div>
-          <div className={style.skeleton__card__content}>
-            <div className={style.skeleton__card__title}></div>
-            <div className={style.skeleton__card__description}></div>
-            <div className={style.skeleton__card__date}>
+    <Cards>
+      <Card>
+        <CardsCard>
+          <Group>
+            <Theme>
+              <p></p>
+            </Theme>
+            <Button></Button>
+          </Group>
+          <Content>
+            <Title></Title>
+            <Description></Description>
+            <Date>
               <svg></svg>
               <p></p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+            </Date>
+          </Content>
+        </CardsCard>
+      </Card>
+    </Cards>
   );
 };
 export default Skeleton;
