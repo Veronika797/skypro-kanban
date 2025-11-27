@@ -7,7 +7,11 @@ import {
   Description,
   Group,
   Theme,
+  ThemeTitle,
   Title,
+  Date,
+  DateTitle,
+  DateSvg,
 } from "./Skeleton.styled";
 
 const Skeleton = () => {
@@ -17,7 +21,7 @@ const Skeleton = () => {
         <CardsCard>
           <Group>
             <Theme>
-              <p></p>
+              <ThemeTitle></ThemeTitle>
             </Theme>
             <Button></Button>
           </Group>
@@ -25,8 +29,8 @@ const Skeleton = () => {
             <Title></Title>
             <Description></Description>
             <Date>
-              <svg></svg>
-              <p></p>
+              <DateSvg></DateSvg>
+              <DateTitle></DateTitle>
             </Date>
           </Content>
         </CardsCard>
@@ -34,4 +38,5 @@ const Skeleton = () => {
     </Cards>
   );
 };
+
 export default Skeleton;

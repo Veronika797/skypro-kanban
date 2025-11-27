@@ -1,5 +1,4 @@
 import {
-  // CardsContainer,
   CardContainer,
   Group,
   Theme,
@@ -9,7 +8,7 @@ import {
   Description,
   Content,
   DateContainer,
-  // themeColors,
+  DateContainerText,
 } from "./Card.styled";
 
 const Card = ({ id, card }) => {
@@ -18,8 +17,7 @@ const Card = ({ id, card }) => {
   }
 
   return (
-    // <CardsContainer key={id}>
-    <CardContainer>
+    <CardContainer key={id}>
       <Group>
         <Theme theme={card.theme}>
           <Text>{card.topic}</Text>
@@ -53,11 +51,10 @@ const Card = ({ id, card }) => {
             <rect width="18" height="18" x="3" y="4" rx="2" />
             <path d="M3 10h18" />
           </svg>
-          <p>{card.date}</p>
+          <DateContainerText>{card.date}</DateContainerText>
         </DateContainer>
       </Content>
     </CardContainer>
-    // </CardsContainer>
   );
 };
 

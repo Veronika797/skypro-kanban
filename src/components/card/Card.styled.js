@@ -38,18 +38,6 @@ export const themeColors = {
   },
 };
 
-// export const CardsContainer = styled.div`
-//   width: 100%;
-//   position: relative;
-//   display: flex;
-//   flex-direction: column;
-//   gap: 10px;
-
-//   @media screen and (max-width: 1200px) {
-//     width: 230px;
-//   }
-// `;
-
 export const CardContainer = styled.div`
   width: 220px;
   height: 140px;
@@ -144,12 +132,12 @@ export const DateContainer = styled.div`
     width: 13px;
     color: #94a6be;
   }
+`;
 
-  p {
-    margin-left: 6px;
-    font-size: 10px;
-    line-height: 13px;
-    color: #94a6be;
-    letter-spacing: 0.2px;
-  }
+export const DateContainerText = styled.p`
+  margin-left: 6px;
+  font-size: 10px;
+  line-height: 13px;
+  color: #94a6be;
+  letter-spacing: 0.2px;
 `;

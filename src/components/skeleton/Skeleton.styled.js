@@ -21,6 +21,7 @@ export const Card = styled.div`
 `;
 export const CardsCard = styled.div`
   display: contents;
+  // display: block;
 `;
 
 export const Group = styled.div`
@@ -32,10 +33,10 @@ export const Group = styled.div`
 
 export const Theme = styled.div`
   display: none;
+`;
 
-  p {
-    display: none;
-  }
+export const ThemeTitle = styled.p`
+  display: none;
 `;
 
 export const Button = styled.button`
@@ -63,16 +64,13 @@ export const Date = styled.div`
   gap: 10px;
   border-radius: 50px;
   background-color: rgba(177, 177, 177, 1);
-
-  p {
-    display: none;
-  }
-
-  svg {
-    display: none;
-  }
 `;
-
+export const DateSvg = styled.svg`
+  display: none;
+`;
+export const DateTitle = styled.p`
+  display: none;
+`;
 /* .skeleton__card {
   width: 270px;
   height: 159px;

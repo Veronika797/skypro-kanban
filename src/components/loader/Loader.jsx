@@ -1,4 +1,4 @@
-// import style from "./Loader.styled.js";
+// import style from "./Loader/Loader.module.css";
 
 // // import Column from "../column/Column";
 // import { columnsData } from "../../data";

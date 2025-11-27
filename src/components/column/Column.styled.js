@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 export const Col = styled.div`
-  width: 20%;
   margin: 0 auto;
   display: block;
 
@@ -45,9 +44,11 @@ export const Crds = styled.div`
   position: relative;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 20px;
 
   @media screen and (max-width: 1200px) {
     flex-direction: row;
+    flex-wrap: wrap;
+    gap: 10px;
   }
 `;

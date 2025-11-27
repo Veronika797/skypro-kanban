@@ -8,11 +8,6 @@ export const Container = styled.div`
   width: 100%;
   margin: 0 auto;
   padding: 0 30px;
-
-  @media screen and (max-width: 495px) {
-    width: 100%;
-    padding: 0 16px;
-  }
 `;
 export const Block = styled.div`
   width: 100%;
@@ -22,7 +17,7 @@ export const Block = styled.div`
   @media screen and (max-width: 1200px) {
     width: 100%;
     margin: 0 auto;
-    padding: 40px 0 64px;
+    padding: 30px 0;
   }
 `;
 export const Content = styled.div`
@@ -40,5 +35,6 @@ export const Columns = styled.div`
   @media screen and (max-width: 1200px) {
     display: flex;
     flex-direction: column;
+    padding-bottom: 30px;
   }
 `;

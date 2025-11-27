@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react";
 import "./App.css";
+import GlobalStyle from "./GlobalStyle";
+import Wrapper from "./Shared.styled";
 import Header from "./components/Header/Header";
 import Main from "./components/Main/Main";
 import PopBrowse from "./components/popups/browse/PopBrowse";
 import PopNewCard from "./components/popups/newCard/PopNewCard";
 import PopUser from "./components/popups/user/PopUser";
 import { allCards } from "./data";
-// import UserProfile from "./components/popups/UserProfile/UserProfil";
-// import Loader from "./components/loader/Loader";
+import Skeleton from "./components/Skeleton/Skeleton";
 
 function App() {
   const [click, setClick] = useState(true);
@@ -15,11 +16,8 @@ function App() {
   const [loading, setLoading] = useState(true);
   const [cards, setCards] = useState([]);
   const [isVisible, setVisible] = useState(true);
-  // const [isPopUser, setPopUser] = useState(false);
-  // const [isUserProfile, setUserProfile] = useState(false);
-  // const [showSkeleton, setShowSkeleton] = useState(true);
+  const [showSkeleton, setShowSkeleton] = useState(false);
 
-  // const clickPopUser = () => setClick(true);
   const closePopUser = () => setClick(false);
   const openNewCard = () => {
     setPopNewCard(true);
@@ -32,42 +30,69 @@ function App() {
 
   useEffect(() => {
     const fetchData = () => {
-      // setShowSkeleton(true);
+      setLoading(true);
+      // console.log("Loading: true", loading);
+      setShowSkeleton(true);
+
+      // console.log("Show Skeleton: false", showSkeleton);
+
+      // setTimeout(() => {
+      //   console.log("Before setting, Show Skeleton:", showSkeleton);
+      //   setShowSkeleton(true);
+      //   console.log("After setting Skeleton to true");
+      // }, 1000);
+
       setTimeout(() => {
         setCards(allCards);
+        // console.log("Cards:", cards);
         setLoading(false);
-        // setShowSkeleton(false);
+        // console.log("Loading: false", loading);
+        setShowSkeleton(false);
+        // console.log("Show Skeleton: false", showSkeleton);
       }, 3000);
     };
 
     fetchData();
   }, []);
 
+  // useEffect(() => {
+  //   console.log("Loading:", loading);
+  //   console.log("Show Skeleton:", showSkeleton);
+  // }, [loading, showSkeleton]);
+
   return (
-    <div className="wrapper">
-      {isPopNewCard && <PopNewCard closeNewCard={closeNewCard} />}
-      {click && (
-        <div className="header__pop-user-set">
-          <PopUser closePopUser={closePopUser} />
-        </div>
-      )}
+    <>
+      <GlobalStyle />
+      <Wrapper>
+        {isPopNewCard && <PopNewCard closeNewCard={closeNewCard} />}
+        {click && (
+          <div className="header__pop-user-set">
+            <PopUser closePopUser={closePopUser} />
+          </div>
+        )}
 
-      <PopBrowse />
+        <PopBrowse />
 
-      {loading ? (
-        <div className="loading">
-          <p>Данные загружаются...</p>
-        </div>
-      ) : (
-        isVisible && (
+        {loading ? (
+          <div className="loading">
+            <p>Данные загружаются...</p>
+          </div>
+        ) : (
           <>
-            <Header openNewCard={openNewCard} />
-            <Main loading={loading} />
-            {/* <Loader cards={cards} showSkeleton={showSkeleton} /> */}
+            {showSkeleton ? (
+              <Skeleton loading={showSkeleton} />
+            ) : (
+              isVisible && (
+                <div>
+                  <Header openNewCard={openNewCard} />
+                  <Main loading={loading} cards={cards} />
+                </div>
+              )
+            )}
           </>
-        )
-      )}
-    </div>
+        )}
+      </Wrapper>
+    </>
   );
 }
 
