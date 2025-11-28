@@ -31,34 +31,19 @@ function App() {
   useEffect(() => {
     const fetchData = () => {
       setLoading(true);
-      // console.log("Loading: true", loading);
+      console.log("Before Skeleton false", showSkeleton);
       setShowSkeleton(true);
-
-      // console.log("Show Skeleton: false", showSkeleton);
-
-      // setTimeout(() => {
-      //   console.log("Before setting, Show Skeleton:", showSkeleton);
-      //   setShowSkeleton(true);
-      //   console.log("After setting Skeleton to true");
-      // }, 1000);
+      console.log("After Skeleton true");
 
       setTimeout(() => {
         setCards(allCards);
-        // console.log("Cards:", cards);
         setLoading(false);
-        // console.log("Loading: false", loading);
         setShowSkeleton(false);
-        // console.log("Show Skeleton: false", showSkeleton);
       }, 3000);
     };
 
     fetchData();
   }, []);
-
-  // useEffect(() => {
-  //   console.log("Loading:", loading);
-  //   console.log("Show Skeleton:", showSkeleton);
-  // }, [loading, showSkeleton]);
 
   return (
     <>
@@ -74,20 +59,21 @@ function App() {
         <PopBrowse />
 
         {loading ? (
-          <div className="loading">
-            <p>Данные загружаются...</p>
+          <div className="content">
+            <div className="loading">Данные загружаются...</div>
+            <div className="skeleton-container">
+              {[...Array(5)].map((_, index) => (
+                <Skeleton key={index} />
+              ))}
+            </div>
           </div>
         ) : (
           <>
-            {showSkeleton ? (
-              <Skeleton loading={showSkeleton} />
-            ) : (
-              isVisible && (
-                <div>
-                  <Header openNewCard={openNewCard} />
-                  <Main loading={loading} cards={cards} />
-                </div>
-              )
+            {isVisible && (
+              <div>
+                <Header openNewCard={openNewCard} />
+                <Main loading={loading} />
+              </div>
             )}
           </>
         )}

@@ -1,39 +1,13 @@
-import {
-  Button,
-  Card,
-  Cards,
-  CardsCard,
-  Content,
-  Description,
-  Group,
-  Theme,
-  ThemeTitle,
-  Title,
-  Date,
-  DateTitle,
-  DateSvg,
-} from "./Skeleton.styled";
+import { Card, Cards, Content, Group, Date } from "./Skeleton.styled";
 
-const Skeleton = () => {
+const Skeleton = ({ id }) => {
   return (
-    <Cards>
+    <Cards key={id}>
       <Card>
-        <CardsCard>
-          <Group>
-            <Theme>
-              <ThemeTitle></ThemeTitle>
-            </Theme>
-            <Button></Button>
-          </Group>
-          <Content>
-            <Title></Title>
-            <Description></Description>
-            <Date>
-              <DateSvg></DateSvg>
-              <DateTitle></DateTitle>
-            </Date>
-          </Content>
-        </CardsCard>
+        <Group></Group>
+        <Content>
+          <Date></Date>
+        </Content>
       </Card>
     </Cards>
   );

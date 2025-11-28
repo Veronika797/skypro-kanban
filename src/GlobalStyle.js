@@ -8,14 +8,14 @@ const GlobalStyle = createGlobalStyle`
   min-height: 100vh;
 }
 
-.loading {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100vh;
-  font-size: 24px;
-  color: #000;
-}
+// .loading {
+//   display: flex;
+//   align-items: center;
+//   justify-content: center;
+//   height: 100vh;
+//   font-size: 24px;
+//   color: #000;
+// }
 .logo {
   height: 6em;
   padding: 1.5em;

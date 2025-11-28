@@ -1,3 +1,32 @@
+.content {
+  margin: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.loading {
+  font-size: 24px;
+  color: #000;
+}
+
+.skeleton-container {
+  margin: 20px;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+@media screen and (max-width: 1439px) {
+  .skeleton-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+}
+
 .header__pop-user-set {
   display: none;
   position: absolute;
