@@ -1,16 +1,13 @@
-.column__title {
-  width: 98px;
-  height: 30px;
-  gap: 10px;
-  border-radius: 50px;
-  background: rgba(16, 16, 16, 0.2);
-}
+import styled from "styled-components";
 
-.column__title p {
-  display: none;
-}
+export const Cards = styled.div`
+  // padding: 10px;
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+`;
 
-.cards__item {
+export const Card = styled.div`
   width: 270px;
   height: 159px;
   border-radius: 24px;
@@ -18,43 +15,26 @@
   padding: 20px;
   background-color: rgba(217, 217, 217, 1);
   border: 1px solid rgba(16, 16, 16, 1);
-}
+`;
 
-.cards__card {
-  display: contents;
-}
-
-.card__group {
+export const Group = styled.div`
   width: 230px;
   height: 30px;
   border-radius: 50px;
+  margin-bottom: 12px;
   background: rgba(177, 177, 177, 1);
-}
-.card__theme,
-.card__theme a {
-  display: none;
-}
+`;
 
-.card__content blank {
+export const Content = styled.div`
   width: 164px;
   border-radius: 50px;
   background: rgba(177, 177, 177, 1);
-}
+`;
 
-.card__title,
-.card__description {
-  display: none;
-}
-
-.card__date {
+export const Date = styled.div`
   width: 81px;
   height: 15px;
   gap: 10px;
   border-radius: 50px;
   background-color: rgba(177, 177, 177, 1);
-}
-
-.card__date svg,
-.card__date p {
-  display: none;
-}
+`;
