@@ -21,7 +21,6 @@ const Main = ({ loading }) => {
                         : allCards.filter(
                             (card) => card.status === column.status
                           );
-                    // console.log(columnsData);
                     return (
                       <Column
                         key={index}
