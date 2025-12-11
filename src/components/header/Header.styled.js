@@ -53,18 +53,11 @@ export const Button = styled.button`
   border-radius: 4px;
   background-color: #565eef;
   border: none;
+  color: #fff;
   font-size: 14px;
   line-height: 1;
   font-weight: 500;
   margin-right: 20px;
-
-  a {
-    color: #ffffff;
-  }
-
-  &:hover {
-    background-color: #33399b;
-  }
 
   @media screen and (max-width: 495px) {
     z-index: 3;
@@ -87,6 +80,7 @@ export const User = styled.a`
   font-size: 14px;
   line-height: 20px;
   color: #565eef;
+  text-decoration: none;
 
   &::after {
     content: "";
@@ -210,6 +204,6 @@ export const ButtonStyled = styled.button`
   border: 1px solid;
 `;
 
-export const ButtonLink = styled.a`
+export const ButtonLink = styled.span`
   color: #565eef;
 `;

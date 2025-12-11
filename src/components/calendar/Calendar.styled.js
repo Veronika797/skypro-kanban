@@ -1,12 +1,8 @@
 import styled from "styled-components";
 
 export const CalendarStyled = styled.div`
-  display: none;
+  display: block;
   width: 100%;
-  min-width: 375px;
-  height: 100%;
-  min-height: 100vh;
-  position: absolute;
   top: 0;
   left: 0;
   z-index: 6;
@@ -42,6 +38,16 @@ export const Subttl = styled(CalendarTitle)`
 `;
 export const CalendarBlock = styled.div`
   display: block;
+
+  p {
+    font-size: 10px;
+    color: rgba(148, 166, 190, 1);
+    font-weight: 400;
+  }
+
+  span {
+    color: #000;
+  }
 `;
 export const CalendarNav = styled.div`
   width: 100%;
@@ -139,20 +145,28 @@ export const CalendarCell = styled.div`
     background-color: #94a6be;
     color: #ffffff;
   }
+
   &.cell-day:hover {
     color: #94a6be;
     background-color: #eaeef6;
   }
+
   &.other-month {
-    opacity: 0;
+    opacity: 0.5;
   }
+
   &.active-day {
     background-color: #94a6be;
     color: #ffffff;
+    font-weight: bold;
   }
 
   &.weekend {
     color: #94a6be;
+  }
+  &.weekend:hover {
+    background-color: #eceff1;
+    color: #ffffff;
   }
   &.current {
     font-weight: 700;
@@ -162,5 +176,11 @@ export const CalendarCell = styled.div`
     width: 42px;
     height: 42px;
     font-size: 14px;
+  }
+
+  @media screen and (max-width: 480px) {
+    width: 30px;
+    height: 30px;
+    font-size: 12px;
   }
 `;

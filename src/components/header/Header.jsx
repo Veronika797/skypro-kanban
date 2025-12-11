@@ -18,27 +18,29 @@ import {
   ButtonStyled,
   ButtonLink,
 } from "./Header.styled";
+import { Link } from "react-router";
 
 const Header = ({ openNewCard, closeNewCard }) => {
   return (
     <Block>
       <Container>
         <Content>
-          <Logo>
-            <a href="" target="_self">
+          <Link to={"/"}>
+            <Logo>
               <img src="images/logo.png" alt="logo"></img>
-            </a>
-          </Logo>
-          <Logo>
-            <a href="" target="_self">
+            </Logo>
+          </Link>
+          <Link to={"/"}>
+            <Logo>
               <img src="images/logo_dark.png" alt="logo"></img>
-            </a>
-          </Logo>
+            </Logo>
+          </Link>
           <Nav>
             <TaskAndName>
-              <Button id="btnMainNew" onClick={openNewCard}>
-                <a href="#popNewCard">Создать новую задачу</a>
-              </Button>
+              <Link to="/add-task">
+                <Button onClick={openNewCard}>Создать новую задачу</Button>
+              </Link>
+
               <User href="#user-set-target">Ivan Ivanov</User>
               <SetUser
                 className="header__pop-user-set pop-user-set"
@@ -58,7 +60,9 @@ const Header = ({ openNewCard, closeNewCard }) => {
                 </ThemeSection>
                 <PopUserButton>
                   <ButtonStyled className="_hover03">
-                    <ButtonLink href="#popExit">Выйти</ButtonLink>
+                    <Link to={"/exit"}>
+                      <ButtonLink>Выйти</ButtonLink>
+                    </Link>
                   </ButtonStyled>
                 </PopUserButton>
               </SetUser>
