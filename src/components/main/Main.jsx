@@ -1,4 +1,4 @@
-import Column from "../Column/Column";
+import Column from "../column/Column";
 import { allCards, columnsData } from "../../data";
 import { Block, Columns, Container, Content, MainContent } from "./Main.styled";
 import Skeleton from "../Skeleton/Skeleton";

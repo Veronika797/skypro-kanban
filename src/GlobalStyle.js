@@ -8,14 +8,6 @@ const GlobalStyle = createGlobalStyle`
   min-height: 100vh;
 }
 
-// .loading {
-//   display: flex;
-//   align-items: center;
-//   justify-content: center;
-//   height: 100vh;
-//   font-size: 24px;
-//   color: #000;
-// }
 .logo {
   height: 6em;
   padding: 1.5em;
@@ -38,11 +30,6 @@ const GlobalStyle = createGlobalStyle`
   }
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 5s linear;
-  }
-}
 
 .read-the-docs {
   color: #888;
@@ -57,12 +44,6 @@ const GlobalStyle = createGlobalStyle`
 *:before,
 *:after {
   box-sizing: border-box;
-}
-
-a,
-a:visited {
-  text-decoration: none;
-  cursor: pointer;
 }
 
 button,
