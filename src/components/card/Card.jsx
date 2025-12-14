@@ -1,3 +1,4 @@
+import { Link } from "react-router";
 import {
   CardContainer,
   Group,
@@ -22,16 +23,17 @@ const Card = ({ id, card }) => {
         <Theme theme={card.theme}>
           <Text>{card.topic}</Text>
         </Theme>
-        <Button href="#popBrowse" target="_self">
-          <div></div>
-          <div></div>
-          <div></div>
-        </Button>
+        <Link to={`/card/${id}`}>
+          <Button>
+            <div></div>
+            <div></div>
+            <div></div>
+          </Button>
+        </Link>
       </Group>
       <Content>
-        <a href="" target="_blank">
-          <Title>{card.title}</Title>
-        </a>
+        <Title>{card.title}</Title>
+
         <Description>{card.description}</Description>
         <DateContainer>
           <svg

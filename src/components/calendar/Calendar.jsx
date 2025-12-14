@@ -1,8 +1,8 @@
+import { useState } from "react";
 import {
   CalendarStyled,
   CalendarContainer,
   CalendarTitle,
-  Subttl,
   CalendarBlock,
   CalendarNav,
   CalendarMonth,
@@ -15,16 +15,97 @@ import {
   CalendarCell,
 } from "./Calendar.styled";
 
+const monthNames = [
+  "Январь",
+  "Февраль",
+  "Март",
+  "Апрель",
+  "Май",
+  "Июнь",
+  "Июль",
+  "Август",
+  "Сентябрь",
+  "Октябрь",
+  "Ноябрь",
+  "Декабрь",
+];
+
 const Calendar = () => {
+  const [currentDate, setCurrentDate] = useState(new Date());
+  const [month, setMonth] = useState(currentDate.getMonth());
+  const [year, setYear] = useState(currentDate.getFullYear());
+  const [selectedDate, setSelectedDate] = useState(null);
+
+  const handleNextMonth = () => {
+    if (month === 11) {
+      setMonth(0);
+      setYear(year + 1);
+    } else {
+      setMonth(month + 1);
+    }
+  };
+
+  const handlePrevMonth = () => {
+    if (month === 0) {
+      setMonth(11);
+      setYear(year - 1);
+    } else {
+      setMonth(month - 1);
+    }
+  };
+
+  const handleDayClick = (day) => {
+    const date = new Date(year, month, day);
+    setSelectedDate(date);
+  };
+
+  const generateCalendarCells = (month, year) => {
+    const cells = [];
+    const totalDaysInMonth = new Date(year, month + 1, 0).getDate();
+    const firstDayOfWeek = new Date(year, month, 1).getDay();
+    const offset = firstDayOfWeek === 0 ? 6 : firstDayOfWeek - 1;
+
+    for (let i = 0; i < offset; i++) {
+      cells.push(
+        <CalendarCell className="other-month" key={`prev-${i}`}></CalendarCell>
+      );
+    }
+
+    for (let day = 1; day <= totalDaysInMonth; day++) {
+      const isWeekend =
+        new Date(year, month, day).getDay() === 0 ||
+        new Date(year, month, day).getDay() === 6;
+      cells.push(
+        <CalendarCell
+          className={`cell-day ${isWeekend ? "weekend" : ""}`}
+          key={day}
+          onClick={() => handleDayClick(day)}
+        >
+          {day}
+        </CalendarCell>
+      );
+    }
+
+    const totalDays = cells.length;
+    const totalSlots = Math.ceil(totalDays / 7) * 7;
+    for (let i = totalDays; i < totalSlots; i++) {
+      cells.push(
+        <CalendarCell className="other-month" key={`next-${i}`}></CalendarCell>
+      );
+    }
+
+    return cells;
+  };
+
   return (
     <CalendarContainer>
       <CalendarStyled>
         <CalendarTitle>Даты</CalendarTitle>
         <CalendarBlock>
           <CalendarNav>
-            <CalendarMonth>Сентябрь 2023</CalendarMonth>
+            <CalendarMonth>{`${monthNames[month]} ${year}`}</CalendarMonth>
             <NavActions>
-              <NavAction data-action="prev">
+              <NavAction onClick={handlePrevMonth}>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="6"
@@ -34,7 +115,7 @@ const Calendar = () => {
                   <path d="M5.72945 1.95273C6.09018 1.62041 6.09018 1.0833 5.72945 0.750969C5.36622 0.416344 4.7754 0.416344 4.41218 0.750969L0.528487 4.32883C-0.176162 4.97799 -0.176162 6.02201 0.528487 6.67117L4.41217 10.249C4.7754 10.5837 5.36622 10.5837 5.72945 10.249C6.09018 9.9167 6.09018 9.37959 5.72945 9.04727L1.87897 5.5L5.72945 1.95273Z" />
                 </svg>
               </NavAction>
-              <NavAction data-action="next">
+              <NavAction onClick={handleNextMonth}>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="6"
@@ -53,49 +134,24 @@ const Calendar = () => {
               <DayName>ср</DayName>
               <DayName>чт</DayName>
               <DayName>пт</DayName>
-              <DayName className="-weekend-">сб</DayName>
+              <DayName>сб</DayName>
               <DayName className="-weekend-">вс</DayName>
             </CalendarDaysNames>
-            <CalendarCells>
-              <CalendarCell className="other-month">28</CalendarCell>
-              <CalendarCell className="other-month">29</CalendarCell>
-              <CalendarCell className="other-month">30</CalendarCell>
-              <CalendarCell className="cell-day">31</CalendarCell>
-              <CalendarCell className="cell-day">1</CalendarCell>
-              <CalendarCell className="cell-day weekend">2</CalendarCell>
-              <CalendarCell className="cell-day weekend">3</CalendarCell>
-              <CalendarCell className="cell-day">4</CalendarCell>
-              <CalendarCell className="cell-day">5</CalendarCell>
-              <CalendarCell className="cell-day ">6</CalendarCell>
-              <CalendarCell className="cell-day">7</CalendarCell>
-              <CalendarCell className="cell-day current">8</CalendarCell>
-              <CalendarCell className="cell-day weekend">9</CalendarCell>
-              <CalendarCell className="cell-day weekend">10</CalendarCell>
-              <CalendarCell className="cell-day">11</CalendarCell>
-              <CalendarCell className="cell-day">12</CalendarCell>
-              <CalendarCell className="cell-day">14</CalendarCell>
-              <CalendarCell className="cell-day">13</CalendarCell>
-              <CalendarCell className="cell-day">15</CalendarCell>
-              <CalendarCell className="cell-day weekend">16</CalendarCell>
-              <CalendarCell className="cell-day weekend">17</CalendarCell>
-              <CalendarCell className="cell-day">18</CalendarCell>
-              <CalendarCell className="cell-day">19</CalendarCell>
-              <CalendarCell className="cell-day">20</CalendarCell>
-              <CalendarCell className="cell-day">21</CalendarCell>
-              <CalendarCell className="cell-day">22</CalendarCell>
-              <CalendarCell className="cell-day weekend">23</CalendarCell>
-              <CalendarCell className="cell-day weekend">24</CalendarCell>
-              <CalendarCell className="cell-day">25</CalendarCell>
-              <CalendarCell className="cell-day">26</CalendarCell>
-              <CalendarCell className="cell-day">27</CalendarCell>
-              <CalendarCell className="cell-day">28</CalendarCell>
-              <CalendarCell className="cell-day">29</CalendarCell>
-              <CalendarCell className="cell-day weekend">30</CalendarCell>
-              <CalendarCell className="other-month weekend">1</CalendarCell>
-            </CalendarCells>
+            <CalendarCells>{generateCalendarCells(month, year)}</CalendarCells>
           </CalendarContent>
-          <input type="hidden" id="datepick_value" value="08.09.2023"></input>
-          Срок исполнения:
+          <input
+            type="hidden"
+            id="datepick_value"
+            value={selectedDate ? selectedDate.toLocaleDateString("ru-RU") : ""}
+          />
+          <p>
+            Срок исполнения:{" "}
+            <span>
+              {selectedDate
+                ? selectedDate.toLocaleDateString("ru-RU")
+                : "Не выбрана"}
+            </span>
+          </p>
         </CalendarBlock>
       </CalendarStyled>
     </CalendarContainer>
