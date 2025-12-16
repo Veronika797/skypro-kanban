@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import Calendar from "../../components/calendar/Calendar";
+import Calendar from "../../components/Calendar/Calendar";
 import {
   Block,
   CategoriesContainer,
@@ -14,11 +14,10 @@ import {
   FormBlock,
   FormWrap,
   Input,
-  Label,
   PopNewCard,
   Textarea,
   Wrap,
-} from "./PageAddNewTask.styled.js";
+} from "./PageAddNewTask.styled";
 
 const categories = [
   { id: 1, name: "Учеба", className: "orange" },
@@ -48,6 +47,9 @@ const PageAddNewTask = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setTaskName("");
+    setTaskDescription("");
+    setActiveCategory(null);
   };
 
   return (
@@ -56,17 +58,24 @@ const PageAddNewTask = () => {
         <Block>
           <Content>
             <h3>Создание задачи</h3>
-            <Link to={"/"}>
-              <CloseButton type="button">&#10006;</CloseButton>
-            </Link>
+
+            <CloseButton type="button">
+              <Link
+                to={"/"}
+                style={{
+                  textDecoration: "none",
+                }}
+              >
+                &#10006;
+              </Link>
+            </CloseButton>
 
             <Wrap>
               <FormWrap id="formNewCard" onSubmit={handleSubmit}>
                 <FormBlock>
-                  <Label>Название задачи</Label>
+                  <p>Название задачи</p>
                   <Input
                     type="text"
-                    name="name"
                     id="formTitle"
                     placeholder="Введите название задачи..."
                     value={taskName}
@@ -76,9 +85,8 @@ const PageAddNewTask = () => {
                   ></Input>
                 </FormBlock>
                 <FormBlock>
-                  <Label>Описание задачи</Label>
+                  <p>Описание задачи</p>
                   <Textarea
-                    name="text"
                     id="textArea"
                     placeholder="Введите описание задачи..."
                     value={taskDescription}

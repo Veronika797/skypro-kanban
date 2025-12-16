@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { themeColors } from "../../components/card/Card.styled";
+import { themeColors } from "../../components/Card/Card.styled";
 
 const colors = {
   primary: "rgba(86, 94, 239, 1)",
@@ -81,11 +81,11 @@ export const Theme = styled.div`
   background-color: ${(props) =>
     props.theme && themeColors[props.theme]
       ? themeColors[props.theme].backgroundColor
-      : "transparent"};
+      : ""};
   color: ${(props) =>
     props.theme && themeColors[props.theme]
       ? themeColors[props.theme].color
-      : "#000"};
+      : ""};
 
   p {
     font-size: 14px;
@@ -108,16 +108,6 @@ export const StatusThemes = styled.div`
   flex-wrap: wrap;
   align-items: flex-start;
   justify-content: flex-start;
-`;
-
-export const StatusTheme = styled.div`
-  border-radius: 24px;
-  border: 0.7px solid rgba(148, 166, 190, 0.4);
-  background: rgba(148, 166, 190, 1);
-  color: white;
-  padding: 11px 14px 10px;
-  margin-right: 7px;
-  margin-bottom: 7px;
 `;
 
 export const FormWrap = styled.div`

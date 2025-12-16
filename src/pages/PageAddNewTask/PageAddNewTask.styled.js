@@ -68,13 +68,14 @@ export const FormBlock = styled.div`
   display: flex;
   padding-top: 10px;
   flex-direction: column;
-`;
-export const Label = styled.label`
-  color: #000;
-  font-size: 14px;
-  font-weight: 600;
-  line-height: 1;
-  margin-bottom: 15px;
+
+  p {
+    color: #000;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1;
+    margin-bottom: 15px;
+  }
 `;
 
 export const Input = styled.input`

@@ -149,7 +149,7 @@ const Calendar = () => {
             <span>
               {selectedDate
                 ? selectedDate.toLocaleDateString("ru-RU")
-                : "Не выбрана"}
+                : "Дата не выбрана"}
             </span>
           </p>
         </CalendarBlock>

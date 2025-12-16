@@ -18,6 +18,9 @@ function PageLogin({ setIsAuth }) {
   const handleLogin = (e) => {
     e.preventDefault();
     setIsAuth(true);
+
+    localStorage.setItem("isAuth", "true");
+
     navigate("/");
   };
 
@@ -28,15 +31,9 @@ function PageLogin({ setIsAuth }) {
           <Title>Вход</Title>
           <FormModal id="form" onSubmit={handleLogin}>
             <InputWrapper>
-              <AuthInput
-                type="text"
-                name="login"
-                id="formlogin"
-                placeholder="Эл. почта"
-              />
+              <AuthInput type="text" id="formlogin" placeholder="Эл. почта" />
               <InputPassword
                 type="password"
-                name="password"
                 id="formpassword"
                 placeholder="Пароль"
               />

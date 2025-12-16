@@ -83,9 +83,9 @@ export const allCards = [
 ];
 
 export const columnsData = [
-  { title: "Без статуса", status: "no-status" },
-  { title: "Нужно сделать", status: "to-do" },
-  { title: "В работе", status: "in-progress" },
-  { title: "Тестирование", status: "testing" },
-  { title: "Готово", status: "done" },
+  { title: "Без статуса", status: "no-status", theme: "_orange" },
+  { title: "Нужно сделать", status: "to-do", theme: "_blue" },
+  { title: "В работе", status: "in-progress", theme: "_green" },
+  { title: "Тестирование", status: "testing", theme: "_purple" },
+  { title: "Готово", status: "done", theme: "_darkGreen" },
 ];

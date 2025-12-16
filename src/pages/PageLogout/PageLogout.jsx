@@ -1,4 +1,4 @@
-import { Link } from "react-router";
+import { useNavigate } from "react-router";
 import {
   Block,
   ButtonNo,
@@ -11,6 +11,14 @@ import {
 } from "./PageLogout.styled";
 
 function PageLogout({ setIsAuth }) {
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    localStorage.removeItem("isAuth");
+    setIsAuth(false);
+    navigate("/login");
+  };
+
   return (
     <PopExit>
       <Container>
@@ -20,11 +28,11 @@ function PageLogout({ setIsAuth }) {
           </Title>
           <FormExit id="formExit">
             <FormGroup>
-              <ButtonYes id="exitYes" onClick={() => setIsAuth(false)}>
-                <Link to={"/login"}>Да, выйти</Link>
+              <ButtonYes type="button" id="exitYes" onClick={handleLogout}>
+                Да, выйти
               </ButtonYes>
-              <ButtonNo id="exitNo">
-                <Link to={"/"}>Нет, остаться</Link>
+              <ButtonNo type="button" id="exitNo" onClick={() => navigate("/")}>
+                Нет, остаться
               </ButtonNo>
             </FormGroup>
           </FormExit>

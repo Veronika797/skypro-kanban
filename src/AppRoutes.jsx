@@ -11,7 +11,10 @@ import PrivateRoute from "./PrivateRoute";
 
 function AppRoutes() {
   const [loading, setLoading] = useState(true);
-  const [isAuth, setIsAuth] = useState(false);
+  const [isAuth, setIsAuth] = useState(() => {
+    const storageAuth = localStorage.getItem("isAuth");
+    return storageAuth === "true";
+  });
 
   useEffect(() => {
     const fetchData = () => {
@@ -19,7 +22,7 @@ function AppRoutes() {
 
       setTimeout(() => {
         setLoading(false);
-      }, 1000);
+      }, 3000);
     };
 
     fetchData();

@@ -1,11 +1,11 @@
 import { Outlet } from "react-router";
-import Header from "./header/Header";
-import Main from "./main/Main";
+import Header from "./Header/Header";
+import Main from "./Main/Main";
 
 function MainPage({ loading }) {
   return (
     <div>
-      <Header />
+      <Header loading={loading} />
       <Main loading={loading} />
       <Outlet />
     </div>

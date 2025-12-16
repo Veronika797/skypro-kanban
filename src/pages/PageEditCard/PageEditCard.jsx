@@ -1,5 +1,5 @@
 import { useNavigate, useParams } from "react-router";
-import { allCards } from "../../data";
+import { allCards, columnsData } from "../../data";
 import {
   Block,
   ButtonGroup,
@@ -12,7 +12,6 @@ import {
   PopBrowse,
   Status,
   StatusText,
-  StatusTheme,
   StatusThemes,
   Textarea,
   Theme,
@@ -21,12 +20,20 @@ import {
   PrimaryButton,
   SecondaryButton,
 } from "./PageEditCard.styled";
-import Calendar from "../../components/calendar/Calendar";
+import Calendar from "../../components/Calendar/Calendar";
 
-const PageEditCard = ({ description }) => {
+const PageEditCard = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const card = allCards.find((item) => item.id == id);
+
+  const cardId = parseInt(id, 10);
+  const card = allCards.find((item) => item.id === cardId);
+
+  const columnData = columnsData.find(
+    (column) => column.status === card.status
+  );
+  const statusTitle = columnData?.title;
+  const statusTheme = columnData?.theme;
 
   const handleClose = () => {
     navigate("/");
@@ -38,7 +45,7 @@ const PageEditCard = ({ description }) => {
         <Block>
           <Content>
             <TopBlock>
-              <Title>Название задачи</Title>
+              <Title>{card.title}</Title>
               <Theme theme={card.theme}>
                 <p>{card.topic}</p>
               </Theme>
@@ -46,23 +53,21 @@ const PageEditCard = ({ description }) => {
             <Status>
               <StatusText>Статус</StatusText>
               <StatusThemes>
-                <StatusTheme>
-                  <p>{card.status}</p>
-                </StatusTheme>
+                <Theme theme={statusTheme}>
+                  <p>{statusTitle}</p>
+                </Theme>
               </StatusThemes>
             </Status>
             <FormWrap>
               <FormContent>
                 <FormBlock>
-                  <label>Описание задачи</label>
+                  <p>Описание задачи</p>
                   <Textarea
-                    name="text"
                     id="textArea01"
                     readOnly
                     placeholder="Введите описание задачи..."
-                  >
-                    {description}
-                  </Textarea>
+                    value={card.description}
+                  />
                 </FormBlock>
               </FormContent>
               <Calendar />

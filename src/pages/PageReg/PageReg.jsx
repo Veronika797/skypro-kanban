@@ -28,21 +28,10 @@ function PageReg({ setIsAuth }) {
           <Title>Регистрация</Title>
           <FormModal id="form" onSubmit={handleLogin}>
             <InputWrapper>
-              <AuthInput
-                type="text"
-                name="name"
-                id="formname"
-                placeholder="Имя"
-              />
-              <AuthInput
-                type="text"
-                name="login"
-                id="formlogin"
-                placeholder="Эл. почта"
-              />
+              <AuthInput type="text" id="formname" placeholder="Имя" />
+              <AuthInput type="text" id="formlogin" placeholder="Эл. почта" />
               <InputPassword
-                type="input-password"
-                name="password"
+                type="password"
                 id="formpassword"
                 placeholder="Пароль"
               />

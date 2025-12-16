@@ -36,6 +36,10 @@ export const themeColors = {
     backgroundColor: "#7dc1f8",
     color: "#0072cb",
   },
+  _darkGreen: {
+    backgroundColor: "#18b51e",
+    color: "#fff",
+  },
 };
 
 export const CardContainer = styled.div`
@@ -84,13 +88,15 @@ export const Text = styled.p`
   line-height: 10px;
 `;
 
-export const Button = styled.a`
+export const Button = styled.button`
   width: 24px;
   height: 24px;
   display: flex;
   align-items: center;
   justify-content: space-around;
   padding: 2px;
+  border: none;
+  background: transparent;
 
   div {
     width: 4px;
