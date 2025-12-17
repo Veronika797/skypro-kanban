@@ -12,8 +12,8 @@ import PrivateRoute from "./PrivateRoute";
 function AppRoutes() {
   const [loading, setLoading] = useState(true);
   const [isAuth, setIsAuth] = useState(() => {
-    const storageAuth = localStorage.getItem("isAuth");
-    return storageAuth === "true";
+    const storageAuth = localStorage.getItem("token");
+    return storageAuth ? true : false;
   });
 
   useEffect(() => {

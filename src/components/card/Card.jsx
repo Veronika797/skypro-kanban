@@ -16,6 +16,8 @@ const Card = ({ id, card }) => {
   if (!card) {
     return null;
   }
+  // console.log(id);
+  // console.log(card);
 
   return (
     <Link
@@ -24,7 +26,7 @@ const Card = ({ id, card }) => {
         textDecoration: "none",
       }}
     >
-      <CardContainer key={id}>
+      <CardContainer key={card.id}>
         <Group>
           <Theme theme={card.theme}>
             <Text>{card.topic}</Text>

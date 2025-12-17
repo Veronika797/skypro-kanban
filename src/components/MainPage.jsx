@@ -1,6 +1,6 @@
 import { Outlet } from "react-router";
-import Header from "./Header/Header";
-import Main from "./Main/Main";
+import Header from "./header/Header";
+import Main from "./main/Main";
 
 function MainPage({ loading }) {
   return (

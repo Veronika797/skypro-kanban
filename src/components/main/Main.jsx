@@ -1,9 +1,32 @@
-import Column from "../Column/Column";
-import { allCards, columnsData } from "../../data";
+import Column from "../column/Column";
+import { columnsData } from "../../data";
 import { Block, Columns, Container, Content, MainContent } from "./Main.styled";
-import Skeleton from "../Skeleton/Skeleton";
+import Skeleton from "../skeleton/Skeleton";
+import { useEffect, useState } from "react";
+import { getTasks } from "../../services/posts";
 
-const Main = ({ loading }) => {
+const Main = () => {
+  const [allCards, setAllCards] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetchTasks();
+  }, []);
+
+  const fetchTasks = async () => {
+    setLoading(true);
+    try {
+      const data = await getTasks();
+      // console.log(data);
+
+      setAllCards(data.tasks);
+    } catch (error) {
+      console.log("Ошибка при получении задач:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <MainContent>
       <Container>
@@ -22,11 +45,17 @@ const Main = ({ loading }) => {
               ) : (
                 columnsData.map((column) => {
                   const filteredCards =
-                    column.status === "без статуса"
-                      ? allCards.filter((card) => card.status === "без статуса")
+                    column.title.toLowerCase() === "без статуса"
+                      ? allCards.filter(
+                          (card) => card.status.toLowerCase() === "без статуса"
+                        )
                       : allCards.filter(
-                          (card) => card.status === column.status
+                          (card) =>
+                            card.status.toLowerCase() ===
+                            column.title.toLowerCase()
                         );
+                  // console.log(filteredCards);
+
                   return (
                     <Column
                       key={column.status}

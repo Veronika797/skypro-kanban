@@ -9,7 +9,7 @@ export const PopNewCard = styled.div`
 
 export const Container = styled.div`
   width: 100%;
-  height: 100%;
+  // height: 100%;
   min-height: 100vh;
   padding: 0 16px;
   display: flex;
@@ -24,16 +24,14 @@ export const Block = styled.div`
   margin: 0 auto;
   background-color: #ffffff;
   max-width: 630px;
-  width: 100%;
-  padding: 40px 30px 48px;
   border-radius: 10px;
   border: 0.7px solid #d4dbe5;
   position: relative;
 `;
 
 export const Content = styled.div`
-  display: block;
   text-align: left;
+  padding: 40px 30px;
 `;
 
 export const CloseButton = styled.button`
@@ -52,21 +50,23 @@ export const CloseButton = styled.button`
 
 export const Wrap = styled.div`
   display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  margin-top: 20px;
 `;
 
 export const FormWrap = styled.form`
-  max-width: 370px;
-  width: 100%;
-  display: block;
   margin-bottom: 20px;
+`;
+
+export const FormTask = styled.div`
+  display: flex;
+  gap: 21px;
+`;
+export const TaskNameAndDescr = styled.div`
+  width: 370px;
 `;
 
 export const FormBlock = styled.div`
   display: flex;
-  padding-top: 10px;
+  padding-top: 20px;
   flex-direction: column;
 
   p {
@@ -79,7 +79,8 @@ export const FormBlock = styled.div`
 `;
 
 export const Input = styled.input`
-  width: 100%;
+  width: 370px;
+  margin-top: 20px;
   padding: 14px;
   background: transparent;
   border: 0.7px solid rgba(148, 166, 190, 0.4);
@@ -87,7 +88,6 @@ export const Input = styled.input`
   font-size: 14px;
   line-height: 1;
   letter-spacing: -0.14px;
-  margin: 20px 0;
 
   &::placeholder {
     color: #94a6be;
@@ -98,7 +98,6 @@ export const Input = styled.input`
 `;
 
 export const Textarea = styled.textarea`
-  width: 370px;
   height: 200px;
   padding: 14px;
   background: transparent;
@@ -106,7 +105,6 @@ export const Textarea = styled.textarea`
   border-radius: 8px;
   font-size: 14px;
   line-height: 1;
-  max-height: 200px;
 
   &::placeholder {
     color: #94a6be;
@@ -131,6 +129,7 @@ export const CreateButton = styled.button`
 `;
 
 export const CategoriesContainer = styled.div`
+  width: 570px;
   margin-top: 20px;
 `;
 
@@ -140,6 +139,9 @@ export const CategoriesTitle = styled.p`
   white-space: nowrap;
   margin-top: 14px;
   margin-bottom: 15px;
+`;
+export const ButtonForm = styled.div`
+  width: 570px;
 `;
 
 export const CategoriesThemes = styled.div`

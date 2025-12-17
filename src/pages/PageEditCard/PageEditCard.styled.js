@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { themeColors } from "../../components/Card/Card.styled";
+import { themeColors } from "../../components/card/Card.styled";
 
 const colors = {
   primary: "rgba(86, 94, 239, 1)",
