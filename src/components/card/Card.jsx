@@ -1,4 +1,4 @@
-import { Link } from "react-router";
+import { useNavigate } from "react-router";
 import {
   Button,
   CardContainer,
@@ -11,24 +11,37 @@ import {
   Title,
   Text,
 } from "./Card.styled";
+import { categories } from "../../data";
+
+const formatDate = (date) => {
+  const day = String(date.getDate()).padStart(2, "0");
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const year = String(date.getFullYear()).slice(-2);
+  return `${day}.${month}.${year}`;
+};
 
 const Card = ({ id, card }) => {
+  const taskDate = formatDate(new Date());
+  const navigate = useNavigate();
+
   if (!card) {
     return null;
   }
-  // console.log(id);
-  // console.log(card);
+
+  const handleCardClick = (e) => {
+    e.stopPropagation();
+    navigate(`/card/${id}`);
+  };
+
+  const category = categories.find((item) => {
+    return item.name === card.topic;
+  });
 
   return (
-    <Link
-      to={`/card/${id}`}
-      style={{
-        textDecoration: "none",
-      }}
-    >
-      <CardContainer key={card.id}>
+    <>
+      <CardContainer onClick={handleCardClick}>
         <Group>
-          <Theme theme={card.theme}>
+          <Theme className={category?.className}>
             <Text>{card.topic}</Text>
           </Theme>
           <Button>
@@ -59,11 +72,11 @@ const Card = ({ id, card }) => {
               <rect width="18" height="18" x="3" y="4" rx="2" />
               <path d="M3 10h18" />
             </svg>
-            <DateContainerText>{card.date}</DateContainerText>
+            <DateContainerText>{taskDate}</DateContainerText>
           </DateContainer>
         </Content>
       </CardContainer>
-    </Link>
+    </>
   );
 };
 

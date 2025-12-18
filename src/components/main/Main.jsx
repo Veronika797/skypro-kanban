@@ -1,38 +1,21 @@
 import Column from "../column/Column";
 import { columnsData } from "../../data";
-import { Block, Columns, Container, Content, MainContent } from "./Main.styled";
+import {
+  Block,
+  ColumnsContent,
+  Container,
+  Content,
+  MainContent,
+} from "./Main.styled";
 import Skeleton from "../skeleton/Skeleton";
-import { useEffect, useState } from "react";
-import { getTasks } from "../../services/posts";
 
-const Main = () => {
-  const [allCards, setAllCards] = useState([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    fetchTasks();
-  }, []);
-
-  const fetchTasks = async () => {
-    setLoading(true);
-    try {
-      const data = await getTasks();
-      // console.log(data);
-
-      setAllCards(data.tasks);
-    } catch (error) {
-      console.log("Ошибка при получении задач:", error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
+const Main = ({ allCards = [], loading }) => {
   return (
     <MainContent>
       <Container>
         <Block>
           <Content>
-            <Columns>
+            <ColumnsContent>
               {loading ? (
                 <div className="content">
                   <div className="loading">Данные загружаются...</div>
@@ -44,28 +27,22 @@ const Main = () => {
                 </div>
               ) : (
                 columnsData.map((column) => {
-                  const filteredCards =
+                  const filteredCards = allCards.filter((card) =>
                     column.title.toLowerCase() === "без статуса"
-                      ? allCards.filter(
-                          (card) => card.status.toLowerCase() === "без статуса"
-                        )
-                      : allCards.filter(
-                          (card) =>
-                            card.status.toLowerCase() ===
-                            column.title.toLowerCase()
-                        );
-                  // console.log(filteredCards);
-
+                      ? card.status.toLowerCase() === "без статуса"
+                      : card.status.toLowerCase() ===
+                        column.status.toLowerCase()
+                  );
                   return (
                     <Column
                       key={column.status}
                       title={column.title}
-                      cards={filteredCards.length > 0 ? filteredCards : []}
+                      cards={filteredCards}
                     />
                   );
                 })
               )}
-            </Columns>
+            </ColumnsContent>
           </Content>
         </Block>
       </Container>

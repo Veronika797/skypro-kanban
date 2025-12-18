@@ -9,7 +9,7 @@ const Column = ({ cards, title }) => {
       </Name>
       <Crds>
         {Array.isArray(cards) && cards.length ? (
-          cards.map((card) => <Card key={card.id} id={card.id} card={card} />)
+          cards.map((card) => <Card key={card._id} id={card._id} card={card} />)
         ) : (
           <p>Нет доступных карточек</p>
         )}

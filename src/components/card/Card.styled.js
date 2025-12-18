@@ -11,37 +11,6 @@ const cardAnimation = keyframes`
   }
 `;
 
-export const themeColors = {
-  _orange: {
-    backgroundColor: "#ffe4c2",
-    color: "#ff6d00",
-  },
-  _pink: {
-    backgroundColor: "#fbafe4",
-    color: "#f432e4",
-  },
-  _yellow: {
-    backgroundColor: "#fbfb0e",
-    color: "#9ea303",
-  },
-  _green: {
-    backgroundColor: "#b4fdd1",
-    color: "#06b16e",
-  },
-  _purple: {
-    backgroundColor: "#e9d4ff",
-    color: "#9a48f1",
-  },
-  _blue: {
-    backgroundColor: "#7dc1f8",
-    color: "#0072cb",
-  },
-  _darkGreen: {
-    backgroundColor: "#18b51e",
-    color: "#fff",
-  },
-};
-
 export const CardContainer = styled.div`
   width: 220px;
   height: 140px;
@@ -70,16 +39,29 @@ export const Theme = styled.div`
   padding: 5px 14px;
   border-radius: 18px;
 
-  ${({ theme }) =>
-    theme && themeColors[theme]
-      ? `
-  background-color: ${themeColors[theme].backgroundColor};
-  color: ${themeColors[theme].color};
-  `
-      : `
-    background-color: #ffffff;
-    color: #000000;
-  `}
+  &.orange {
+    background-color: #ffe4c2;
+  }
+
+  &.green {
+    background-color: #b4fdd1;
+  }
+
+  &.purple {
+    background-color: #e9d4ff;
+  }
+
+  &.blue {
+    background-color: #7dc1f8;
+  }
+
+  &.pink {
+    background-color: #fbafe4;
+  }
+
+  &.yellow {
+    background-color: #fbfb0e;
+  }
 `;
 
 export const Text = styled.p`

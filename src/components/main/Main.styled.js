@@ -27,7 +27,7 @@ export const Content = styled.div`
   }
 `;
 
-export const Columns = styled.div`
+export const ColumnsContent = styled.div`
   display: flex;
   gap: 10px;
 

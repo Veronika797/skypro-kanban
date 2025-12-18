@@ -3,7 +3,7 @@ import { getTask } from "../../services/posts";
 import { useEffect, useState } from "react";
 import FormUpdateCard from "../../components/card/FormUpdateCard";
 
-const PageEditCard = () => {
+const PageEditCard = ({ setAllCards }) => {
   const { id } = useParams();
   const [card, setCard] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -19,7 +19,7 @@ const PageEditCard = () => {
 
   return (
     <>
-      <FormUpdateCard card={card} />
+      <FormUpdateCard card={card} setAllCards={setAllCards} />
     </>
   );
 };

@@ -28,12 +28,32 @@ export async function updateTask(id, body) {
   try {
     const { data } = await axios.put(
       "https://wedev-api.sky.pro/api/kanban/" + id,
-      body
+      body,
+      {
+        headers: {
+          "Content-Type": "",
+        },
+      }
     );
     return data.tasks;
   } catch (error) {
     console.error(
       "Ошибка при редактировании задачи:",
+      error.response?.data || error.message
+    );
+    throw error;
+  }
+}
+
+export async function deleteTask(id) {
+  try {
+    const { data } = await axios.delete(
+      "https://wedev-api.sky.pro/api/kanban/" + id
+    );
+    return data.tasks;
+  } catch (error) {
+    console.error(
+      "Ошибка при удалении задачи:",
       error.response?.data || error.message
     );
     throw error;

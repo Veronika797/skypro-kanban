@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   CalendarStyled,
   CalendarContainer,
@@ -30,71 +30,73 @@ const monthNames = [
   "Декабрь",
 ];
 
-const Calendar = () => {
+const Calendar = ({ date }) => {
   const [currentDate, setCurrentDate] = useState(new Date());
-  const [month, setMonth] = useState(currentDate.getMonth());
-  const [year, setYear] = useState(currentDate.getFullYear());
-  const [selectedDate, setSelectedDate] = useState(null);
+  const [selectedDate, setSelectedDate] = useState(
+    date ? new Date(date) : null
+  );
 
-  const handleNextMonth = () => {
-    if (month === 11) {
-      setMonth(0);
-      setYear(year + 1);
-    } else {
-      setMonth(month + 1);
-    }
+  useEffect(() => {
+    setSelectedDate(date ? new Date(date) : null);
+  }, [date]);
+
+  const handleDateChange = (day) => {
+    const newDate = new Date(
+      currentDate.getFullYear(),
+      currentDate.getMonth(),
+      day
+    );
+    setSelectedDate(newDate);
   };
 
-  const handlePrevMonth = () => {
-    if (month === 0) {
-      setMonth(11);
-      setYear(year - 1);
-    } else {
-      setMonth(month - 1);
-    }
+  const handleMonthChange = (delta) => {
+    const newDate = new Date(
+      currentDate.setMonth(currentDate.getMonth() + delta)
+    );
+    setCurrentDate(newDate);
   };
 
-  const handleDayClick = (day) => {
-    const date = new Date(year, month, day);
-    setSelectedDate(date);
-  };
-
-  const generateCalendarCells = (month, year) => {
+  const generateCalendarCells = () => {
     const cells = [];
+    const year = currentDate.getFullYear();
+    const month = currentDate.getMonth();
     const totalDaysInMonth = new Date(year, month + 1, 0).getDate();
     const firstDayOfWeek = new Date(year, month, 1).getDay();
     const offset = firstDayOfWeek === 0 ? 6 : firstDayOfWeek - 1;
 
     for (let i = 0; i < offset; i++) {
-      cells.push(
-        <CalendarCell className="other-month" key={`prev-${i}`}></CalendarCell>
-      );
+      cells.push(<CalendarCell key={`prev-${i}`}></CalendarCell>);
     }
 
     for (let day = 1; day <= totalDaysInMonth; day++) {
-      const isWeekend =
-        new Date(year, month, day).getDay() === 0 ||
-        new Date(year, month, day).getDay() === 6;
       cells.push(
         <CalendarCell
-          className={`cell-day ${isWeekend ? "weekend" : ""}`}
           key={day}
-          onClick={() => handleDayClick(day)}
+          className={`cell-day ${
+            new Date(year, month, day).getDay() % 6 === 0 ? "weekend" : ""
+          }`}
+          onClick={() => handleDateChange(day)}
         >
           {day}
         </CalendarCell>
       );
     }
 
-    const totalDays = cells.length;
-    const totalSlots = Math.ceil(totalDays / 7) * 7;
-    for (let i = totalDays; i < totalSlots; i++) {
-      cells.push(
-        <CalendarCell className="other-month" key={`next-${i}`}></CalendarCell>
-      );
+    const totalSlots = Math.ceil(cells.length / 7) * 7;
+    for (let i = cells.length; i < totalSlots; i++) {
+      cells.push(<CalendarCell key={`next-${i}`}></CalendarCell>);
     }
 
     return cells;
+  };
+
+  const formatSelectedDate = (date) => {
+    if (!date) return "Дата не выбрана";
+
+    const day = String(date.getDate()).padStart(2, "0");
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const year = String(date.getFullYear()).slice(-2);
+    return `${day}.${month}.${year}`;
   };
 
   return (
@@ -103,9 +105,11 @@ const Calendar = () => {
         <CalendarTitle>Даты</CalendarTitle>
         <CalendarBlock>
           <CalendarNav>
-            <CalendarMonth>{`${monthNames[month]} ${year}`}</CalendarMonth>
+            <CalendarMonth>{`${
+              monthNames[currentDate.getMonth()]
+            } ${currentDate.getFullYear()}`}</CalendarMonth>
             <NavActions>
-              <NavAction onClick={handlePrevMonth}>
+              <NavAction onClick={() => handleMonthChange(-1)}>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="6"
@@ -115,7 +119,7 @@ const Calendar = () => {
                   <path d="M5.72945 1.95273C6.09018 1.62041 6.09018 1.0833 5.72945 0.750969C5.36622 0.416344 4.7754 0.416344 4.41218 0.750969L0.528487 4.32883C-0.176162 4.97799 -0.176162 6.02201 0.528487 6.67117L4.41217 10.249C4.7754 10.5837 5.36622 10.5837 5.72945 10.249C6.09018 9.9167 6.09018 9.37959 5.72945 9.04727L1.87897 5.5L5.72945 1.95273Z" />
                 </svg>
               </NavAction>
-              <NavAction onClick={handleNextMonth}>
+              <NavAction onClick={() => handleMonthChange(1)}>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="6"
@@ -129,28 +133,14 @@ const Calendar = () => {
           </CalendarNav>
           <CalendarContent>
             <CalendarDaysNames>
-              <DayName>пн</DayName>
-              <DayName>вт</DayName>
-              <DayName>ср</DayName>
-              <DayName>чт</DayName>
-              <DayName>пт</DayName>
-              <DayName>сб</DayName>
-              <DayName className="-weekend-">вс</DayName>
+              {["пн", "вт", "ср", "чт", "пт", "сб", "вс"].map((day, index) => (
+                <DayName key={index}>{day}</DayName>
+              ))}
             </CalendarDaysNames>
-            <CalendarCells>{generateCalendarCells(month, year)}</CalendarCells>
+            <CalendarCells>{generateCalendarCells()}</CalendarCells>
           </CalendarContent>
-          <input
-            type="hidden"
-            id="datepick_value"
-            value={selectedDate ? selectedDate.toLocaleDateString("ru-RU") : ""}
-          />
           <p>
-            Срок исполнения:{" "}
-            <span>
-              {selectedDate
-                ? selectedDate.toLocaleDateString("ru-RU")
-                : "Дата не выбрана"}
-            </span>
+            Срок исполнения: <span>{formatSelectedDate(selectedDate)}</span>
           </p>
         </CalendarBlock>
       </CalendarStyled>
