@@ -100,8 +100,15 @@ const FormUpdateCard = ({ card, setAllCards }) => {
           <Content>
             <TopBlock>
               <Title>{card.title}</Title>
-              <Theme className={card.topic}>
-                <p>{card.topic}</p>
+              <Theme
+                className={
+                  taskCategory
+                    ? categories.find((cat) => cat.name === taskCategory)
+                        ?.className || "gray"
+                    : "gray"
+                }
+              >
+                <p>{taskCategory || "Research"}</p>
               </Theme>
             </TopBlock>
             <Status>

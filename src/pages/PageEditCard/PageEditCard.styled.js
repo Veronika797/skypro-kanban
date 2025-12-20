@@ -100,6 +100,9 @@ export const Theme = styled.div`
   &.yellow {
     background-color: #fbfb0e;
   }
+  &.gray {
+    background-color: #d4d4d4;
+  }
 
   p {
     font-size: 14px;

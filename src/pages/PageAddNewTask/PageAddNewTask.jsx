@@ -61,11 +61,10 @@ const PageAddNewTask = ({ setAllCards }) => {
       date: taskDate.toISOString(),
     };
 
-    console.log("Отправляемый объект задачи:", body);
+    // console.log("Отправляемый объект задачи:", body);
 
     try {
       const updatedTasks = await addTasks(body);
-      console.log("Обновленный список задач:", updatedTasks);
 
       setAllCards(updatedTasks);
 

@@ -12,6 +12,7 @@ import {
   Text,
 } from "./Card.styled";
 import { categories } from "../../data";
+import { useState } from "react";
 
 const formatDate = (date) => {
   const day = String(date.getDate()).padStart(2, "0");
@@ -22,6 +23,7 @@ const formatDate = (date) => {
 
 const Card = ({ id, card }) => {
   const taskDate = formatDate(new Date());
+  const [taskCategory, setTaskCategory] = useState(card.topic);
   const navigate = useNavigate();
 
   if (!card) {
@@ -41,8 +43,15 @@ const Card = ({ id, card }) => {
     <>
       <CardContainer onClick={handleCardClick}>
         <Group>
-          <Theme className={category?.className}>
-            <Text>{card.topic}</Text>
+          <Theme
+            className={
+              taskCategory
+                ? categories.find((cat) => cat.name === taskCategory)
+                    ?.className || "gray"
+                : "gray"
+            }
+          >
+            <Text>{taskCategory || "Research"}</Text>
           </Theme>
           <Button>
             <div></div>

@@ -62,6 +62,9 @@ export const Theme = styled.div`
   &.yellow {
     background-color: #fbfb0e;
   }
+  &.gray {
+    background-color: #d4d4d4;
+  }
 `;
 
 export const Text = styled.p`
