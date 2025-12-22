@@ -11,10 +11,12 @@ import {
   Title,
   WindowModal,
 } from "./PageReg.styled";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { reg } from "../../services/auth";
+import { AuthContext } from "../../context/AuthContext";
 
-function PageReg({ setIsAuth }) {
+function PageReg() {
+  const { setIsAuth } = useContext(AuthContext);
   const navigate = useNavigate();
   const [userName, setUserName] = useState("");
   const [email, setEmail] = useState("");

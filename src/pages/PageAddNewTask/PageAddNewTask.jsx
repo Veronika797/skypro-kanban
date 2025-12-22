@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Calendar from "../../components/calendar/Calendar";
 import {
@@ -23,8 +23,11 @@ import {
 } from "./PageAddNewTask.styled";
 import { addTasks } from "../../services/posts";
 import { categories } from "../../data";
+import { TaskContext } from "../../context/TaskContext";
 
-const PageAddNewTask = ({ setAllCards }) => {
+const PageAddNewTask = () => {
+  const { setAllCards } = useContext(TaskContext);
+
   const navigate = useNavigate();
   const [taskName, setTaskName] = useState("");
   const [taskCategory, setTaskCategory] = useState(null);

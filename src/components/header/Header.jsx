@@ -1,3 +1,4 @@
+import { useContext } from "react";
 import {
   Block,
   Container,
@@ -19,8 +20,10 @@ import {
   ButtonLink,
 } from "./Header.styled";
 import { Link, useNavigate } from "react-router";
+import { TaskContext } from "../../context/TaskContext";
 
-const Header = ({ openNewCard, closeNewCard, loading }) => {
+const Header = ({ openNewCard, closeNewCard }) => {
+  const { loading } = useContext(TaskContext);
   const navigate = useNavigate();
 
   const handleLogout = () => {

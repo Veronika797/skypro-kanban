@@ -8,8 +8,11 @@ import {
   MainContent,
 } from "./Main.styled";
 import Skeleton from "../skeleton/Skeleton";
+import { useContext } from "react";
+import { TaskContext } from "../../context/TaskContext";
 
-const Main = ({ allCards = [], loading }) => {
+const Main = () => {
+  const { loading, allCards } = useContext(TaskContext);
   return (
     <MainContent>
       <Container>

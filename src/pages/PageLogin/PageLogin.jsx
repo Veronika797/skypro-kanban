@@ -11,10 +11,13 @@ import {
   WindowModal,
   ModalWindow,
 } from "./PageLogin.styled";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { login } from "../../services/auth";
+import { AuthContext } from "../../context/AuthContext";
 
-function PageLogin({ setIsAuth }) {
+function PageLogin() {
+  const { setIsAuth } = useContext(AuthContext);
+
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
