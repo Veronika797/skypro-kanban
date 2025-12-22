@@ -22,6 +22,10 @@ export const CardContainer = styled.div`
   justify-content: stretch;
   padding: 15px 13px 15px;
   animation: ${cardAnimation} 500ms linear;
+
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 export const Group = styled.div`
