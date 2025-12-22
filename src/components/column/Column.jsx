@@ -1,7 +1,7 @@
-import Card from "../Card/Card.jsx";
-import { Col, Name, Crds } from "./Column.styled.js";
+import Card from "../card/Card";
+import { Col, Name, Crds } from "./Column.styled";
 
-const Column = ({ cards, title, onOpen }) => {
+const Column = ({ cards, title }) => {
   return (
     <Col>
       <Name>
@@ -9,9 +9,7 @@ const Column = ({ cards, title, onOpen }) => {
       </Name>
       <Crds>
         {Array.isArray(cards) && cards.length ? (
-          cards.map((card, id) => (
-            <Card key={id} id={card.id} card={card} onClick={onOpen} />
-          ))
+          cards.map((card) => <Card key={card._id} id={card._id} card={card} />)
         ) : (
           <p>Нет доступных карточек</p>
         )}

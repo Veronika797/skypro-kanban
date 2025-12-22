@@ -1,13 +1,12 @@
 import styled from "styled-components";
 
 export const MainContent = styled.div`
-  width: 100%;
-`;
-export const Container = styled.div`
   max-width: 1260px;
-  width: 100%;
   margin: 0 auto;
   padding: 0 30px;
+`;
+export const Container = styled.div`
+  width: 100%;
 `;
 export const Block = styled.div`
   width: 100%;
@@ -28,7 +27,7 @@ export const Content = styled.div`
   }
 `;
 
-export const Columns = styled.div`
+export const ColumnsContent = styled.div`
   display: flex;
   gap: 10px;
 

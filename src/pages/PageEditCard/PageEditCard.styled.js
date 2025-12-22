@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { themeColors } from "../../components/card/Card.styled";
 
 const colors = {
   primary: "rgba(86, 94, 239, 1)",
@@ -77,15 +76,33 @@ export const Theme = styled.div`
   padding: 8px 20px;
   border-radius: 24px;
   margin-right: 7px;
-  opacity: ${(props) => (props.active ? 1 : "")};
-  background-color: ${(props) =>
-    props.theme && themeColors[props.theme]
-      ? themeColors[props.theme].backgroundColor
-      : "transparent"};
-  color: ${(props) =>
-    props.theme && themeColors[props.theme]
-      ? themeColors[props.theme].color
-      : "#000"};
+
+  &.orange {
+    background-color: #ffe4c2;
+  }
+
+  &.green {
+    background-color: #b4fdd1;
+  }
+
+  &.purple {
+    background-color: #e9d4ff;
+  }
+
+  &.blue {
+    background-color: #7dc1f8;
+  }
+
+  &.pink {
+    background-color: #fbafe4;
+  }
+
+  &.yellow {
+    background-color: #fbfb0e;
+  }
+  &.gray {
+    background-color: #d4d4d4;
+  }
 
   p {
     font-size: 14px;
@@ -106,18 +123,43 @@ export const StatusText = styled.p`
 export const StatusThemes = styled.div`
   display: flex;
   flex-wrap: wrap;
-  align-items: flex-start;
+  align-items: center;
   justify-content: flex-start;
+  gap: 10px;
 `;
 
 export const StatusTheme = styled.div`
+  display: inline-block;
+  padding: 8px 10px;
   border-radius: 24px;
-  border: 0.7px solid rgba(148, 166, 190, 0.4);
-  background: rgba(148, 166, 190, 1);
-  color: white;
-  padding: 11px 14px 10px;
   margin-right: 7px;
-  margin-bottom: 7px;
+  cursor: pointer;
+  background-color: transparent;
+  border: 1px solid rgba(148, 166, 190, 0.4);
+
+  p {
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 14px;
+    white-space: nowrap;
+    margin: 0;
+    color: rgba(148, 166, 190, 1);
+  }
+
+  &._active-category {
+    background: rgba(148, 166, 190, 1);
+    color: #fff;
+    border: 1px solid rgba(148, 166, 190, 1);
+
+    p {
+      font-family: Roboto;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 10px;
+      text-align: center;
+      color: rgba(255, 255, 255, 1);
+    }
+  }
 `;
 
 export const FormWrap = styled.div`

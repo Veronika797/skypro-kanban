@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router";
+import { Link, Navigate, useNavigate } from "react-router";
 import {
   AuthInput,
   Background,
@@ -11,14 +11,44 @@ import {
   Title,
   WindowModal,
 } from "./PageReg.styled";
+import { useState } from "react";
+import { reg } from "../../services/auth";
 
 function PageReg({ setIsAuth }) {
   const navigate = useNavigate();
+  const [userName, setUserName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [textError, setTextError] = useState({});
 
-  const handleLogin = (e) => {
+  if (localStorage.getItem("token")) {
+    return <Navigate to="/" />;
+  }
+
+  const handleRegister = (e) => {
     e.preventDefault();
-    setIsAuth(true);
-    navigate("/");
+
+    if (!userName || !email || !password) {
+      const errors = {
+        userName: !userName ? "Веедите имя" : "",
+        email: !email ? "Веедите email" : "",
+        password: !password ? "Веедите пароль" : "",
+      };
+      return setTextError(errors);
+    }
+
+    reg({ login: email, name: userName, password: password })
+      .then((data) => {
+        console.log(data);
+        localStorage.setItem("token", data.user.token);
+        alert("Регистрация прошла успешно");
+        setIsAuth(true);
+        navigate("/");
+      })
+      .catch((error) => {
+        console.log(error);
+        setTextError({ service: error.response.data.error });
+      });
   };
 
   return (
@@ -26,28 +56,61 @@ function PageReg({ setIsAuth }) {
       <ModalWindow>
         <WindowModal>
           <Title>Регистрация</Title>
-          <FormModal id="form" onSubmit={handleLogin}>
+          <FormModal id="form" onSubmit={handleRegister}>
             <InputWrapper>
               <AuthInput
+                style={{
+                  border: textError.userName ? "1px solid red" : "",
+                }}
                 type="text"
-                name="name"
-                id="formname"
                 placeholder="Имя"
+                value={userName}
+                onChange={(e) => setUserName(e.target.value)}
               />
               <AuthInput
-                type="text"
-                name="login"
+                style={{
+                  border: textError.email ? "1px solid red" : "",
+                }}
+                type="email"
                 id="formlogin"
                 placeholder="Эл. почта"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
               />
               <InputPassword
-                type="input-password"
+                style={{
+                  border: textError.password ? "1px solid red" : "",
+                }}
+                type="password"
                 name="password"
                 id="formpassword"
                 placeholder="Пароль"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
               />
             </InputWrapper>
-            <ButtonEnter type="submit">Зарегистрироваться</ButtonEnter>
+            {textError.userName && (
+              <p style={{ color: "red" }}>{textError.userName}</p>
+            )}
+            {textError.email && (
+              <p style={{ color: "red" }}>{textError.email}</p>
+            )}
+            {textError.password && (
+              <p style={{ color: "red" }}>{textError.password}</p>
+            )}
+            {textError.service && (
+              <p style={{ color: "red" }}>{textError.service}</p>
+            )}
+            <ButtonEnter
+              type="submit"
+              // disabled={
+              //   textError.userName && textError.email && textError.password
+              //     ? false
+              //     : true
+              // }
+            >
+              Зарегистрироваться
+            </ButtonEnter>
             <FormGroup>
               <p>
                 Уже есть аккаунт?

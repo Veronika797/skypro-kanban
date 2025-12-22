@@ -8,18 +8,25 @@ import MainPage from "./components/MainPage";
 import PageLogout from "./pages/PageLogout/PageLogout";
 import { useEffect, useState } from "react";
 import PrivateRoute from "./PrivateRoute";
+import { getTasks } from "./services/posts";
 
 function AppRoutes() {
   const [loading, setLoading] = useState(true);
-  const [isAuth, setIsAuth] = useState(false);
+  const [allCards, setAllCards] = useState([]);
+  const [isAuth, setIsAuth] = useState(() => {
+    const storageAuth = localStorage.getItem("token");
+    return storageAuth ? true : false;
+  });
 
   useEffect(() => {
     const fetchData = () => {
       setLoading(true);
-
-      setTimeout(() => {
-        setLoading(false);
-      }, 1000);
+      getTasks()
+        .then((data) => {
+          setAllCards(data.tasks);
+        })
+        .catch((error) => console.log(error))
+        .finally(() => setLoading(false));
     };
 
     fetchData();
@@ -28,9 +35,18 @@ function AppRoutes() {
   return (
     <Routes>
       <Route path="/" element={<PrivateRoute isAuth={isAuth} />}>
-        <Route path="/" element={<MainPage loading={loading} />}>
-          <Route path="/add-task" element={<PageAddNewTask />} />
-          <Route path="/card/:id" element={<PageEditCard />} />
+        <Route
+          path="/"
+          element={<MainPage allCards={allCards} loading={loading} />}
+        >
+          <Route
+            path="/add-task"
+            element={<PageAddNewTask setAllCards={setAllCards} />}
+          />
+          <Route
+            path="/card/:id"
+            element={<PageEditCard setAllCards={setAllCards} />}
+          />
           <Route path="/exit" element={<PageLogout setIsAuth={setIsAuth} />} />
         </Route>
       </Route>

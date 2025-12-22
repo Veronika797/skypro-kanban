@@ -1,35 +1,48 @@
 import Column from "../column/Column";
-import { allCards, columnsData } from "../../data";
-import { Block, Columns, Container, Content, MainContent } from "./Main.styled";
-import Skeleton from "../Skeleton/Skeleton";
+import { columnsData } from "../../data";
+import {
+  Block,
+  ColumnsContent,
+  Container,
+  Content,
+  MainContent,
+} from "./Main.styled";
+import Skeleton from "../skeleton/Skeleton";
 
-const Main = ({ loading }) => {
+const Main = ({ allCards = [], loading }) => {
   return (
     <MainContent>
       <Container>
         <Block>
           <Content>
-            <Columns>
-              {loading
-                ? [...Array(5)].map((_, index) => <Skeleton key={index} />)
-                : columnsData.map((column, index) => {
-                    const filteredCards =
-                      column.status === "без статуса"
-                        ? allCards.filter(
-                            (card) => card.status === "без статуса"
-                          )
-                        : allCards.filter(
-                            (card) => card.status === column.status
-                          );
-                    return (
-                      <Column
-                        key={index}
-                        title={column.title}
-                        cards={filteredCards.length > 0 ? filteredCards : []}
-                      />
-                    );
-                  })}
-            </Columns>
+            <ColumnsContent>
+              {loading ? (
+                <div className="content">
+                  <div className="loading">Данные загружаются...</div>
+                  <div className="skeleton-container">
+                    {[...Array(5)].map((_, index) => (
+                      <Skeleton key={index} />
+                    ))}
+                  </div>
+                </div>
+              ) : (
+                columnsData.map((column) => {
+                  const filteredCards = allCards.filter((card) =>
+                    column.title.toLowerCase() === "без статуса"
+                      ? card.status.toLowerCase() === "без статуса"
+                      : card.status.toLowerCase() ===
+                        column.status.toLowerCase()
+                  );
+                  return (
+                    <Column
+                      key={column.status}
+                      title={column.title}
+                      cards={filteredCards}
+                    />
+                  );
+                })
+              )}
+            </ColumnsContent>
           </Content>
         </Block>
       </Container>
