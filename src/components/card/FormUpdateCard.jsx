@@ -23,9 +23,11 @@ import {
 import Calendar from "../../components/calendar/Calendar";
 import { deleteTask, updateTask } from "../../services/posts";
 import { categories, columnsData } from "../../data";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { TaskContext } from "../../context/TaskContext";
 
-const FormUpdateCard = ({ card, setAllCards }) => {
+const FormUpdateCard = ({ card }) => {
+  const { setAllCards } = useContext(TaskContext);
   const navigate = useNavigate();
   const [taskStatus, setTaskStatus] = useState(card.status);
   const [edditable, setEdditable] = useState(false);

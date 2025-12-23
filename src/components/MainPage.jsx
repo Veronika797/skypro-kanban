@@ -2,11 +2,11 @@ import { Outlet } from "react-router";
 import Header from "./header/Header";
 import Main from "./main/Main";
 
-function MainPage({ loading, allCards }) {
+function MainPage() {
   return (
     <div>
-      <Header loading={loading} />
-      <Main loading={loading} allCards={allCards} />
+      <Header />
+      <Main />
       <Outlet />
     </div>
   );

@@ -9,12 +9,15 @@ import {
   PopExit,
   Title,
 } from "./PageLogout.styled";
+import { useContext } from "react";
+import { AuthContext } from "../../context/AuthContext";
 
-function PageLogout({ setIsAuth }) {
+function PageLogout() {
+  const { setIsAuth } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    localStorage.removeItem("isAuth");
+    localStorage.removeItem("token");
     setIsAuth(false);
     navigate("/login");
   };

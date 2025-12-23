@@ -6,52 +6,20 @@ import PageAddNewTask from "./pages/PageAddNewTask/PageAddNewTask";
 import PageEditCard from "./pages/PageEditCard/PageEditCard";
 import MainPage from "./components/MainPage";
 import PageLogout from "./pages/PageLogout/PageLogout";
-import { useEffect, useState } from "react";
 import PrivateRoute from "./PrivateRoute";
-import { getTasks } from "./services/posts";
 
 function AppRoutes() {
-  const [loading, setLoading] = useState(true);
-  const [allCards, setAllCards] = useState([]);
-  const [isAuth, setIsAuth] = useState(() => {
-    const storageAuth = localStorage.getItem("token");
-    return storageAuth ? true : false;
-  });
-
-  useEffect(() => {
-    const fetchData = () => {
-      setLoading(true);
-      getTasks()
-        .then((data) => {
-          setAllCards(data.tasks);
-        })
-        .catch((error) => console.log(error))
-        .finally(() => setLoading(false));
-    };
-
-    fetchData();
-  }, []);
-
   return (
     <Routes>
-      <Route path="/" element={<PrivateRoute isAuth={isAuth} />}>
-        <Route
-          path="/"
-          element={<MainPage allCards={allCards} loading={loading} />}
-        >
-          <Route
-            path="/add-task"
-            element={<PageAddNewTask setAllCards={setAllCards} />}
-          />
-          <Route
-            path="/card/:id"
-            element={<PageEditCard setAllCards={setAllCards} />}
-          />
-          <Route path="/exit" element={<PageLogout setIsAuth={setIsAuth} />} />
+      <Route path="/" element={<PrivateRoute />}>
+        <Route path="/" element={<MainPage />}>
+          <Route path="/add-task" element={<PageAddNewTask />} />
+          <Route path="/card/:id" element={<PageEditCard />} />
+          <Route path="/exit" element={<PageLogout />} />
         </Route>
       </Route>
-      <Route path="/login" element={<PageLogin setIsAuth={setIsAuth} />} />
-      <Route path="/register" element={<PageReg setIsAuth={setIsAuth} />} />
+      <Route path="/login" element={<PageLogin />} />
+      <Route path="/register" element={<PageReg />} />
       <Route path="*" element={<Page404 />} />
     </Routes>
   );
