@@ -38,7 +38,7 @@ const Header = ({ openNewCard, closeNewCard }) => {
       {loading ? (
         ""
       ) : (
-        <Block center>
+        <Block>
           <Container>
             <Content>
               <Link to="/">
