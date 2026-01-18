@@ -5,6 +5,7 @@ export const Background = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: ${({ theme }) => theme.bodyBg};
   border: 0.7px solid rgba(212, 219, 229, 1);
   border-radius: 10px;
 `;
@@ -12,9 +13,9 @@ export const Background = styled.div`
 export const ModalWindow = styled.div`
   width: 368px;
   height: 329px;
-  background: rgba(255, 255, 255, 1);
+  background: ${({ theme }) => theme.cardBg};
   box-shadow: 0px 4px 67px -12px rgba(0, 0, 0, 0.13);
-  border: 0.7px solid rgba(212, 219, 229, 1);
+  border: ${({ theme }) => theme.border};
   border-radius: 10px;
 `;
 
@@ -30,6 +31,7 @@ export const Title = styled.h2`
   font-size: 20px;
   line-height: 150%;
   text-align: center;
+  color: ${({ theme }) => theme.text};
 `;
 
 export const FormModal = styled.form`
@@ -55,7 +57,9 @@ export const AuthInput = styled.input`
   height: 30px;
   border-radius: 8px;
   padding: 8px 10px;
-  border: 0.7px solid rgba(148, 166, 190, 0.4);
+  border: ${({ theme }) => theme.border};
+  color: ${({ theme }) => theme.text};
+  background: ${({ theme }) => theme.inputBg};
 `;
 
 export const InputPassword = styled.input`
@@ -63,15 +67,17 @@ export const InputPassword = styled.input`
   height: 30px;
   border-radius: 8px;
   padding: 8px 10px;
-  border: 0.7px solid rgba(148, 166, 190, 0.4);
+  border: ${({ theme }) => theme.border};
+  color: ${({ theme }) => theme.text};
+  background: ${({ theme }) => theme.inputBg};
 `;
 
 export const ButtonEnter = styled.button`
   color: #fff;
-  background: rgba(86, 94, 239, 1);
+  background: ${({ theme }) => theme.buttonPrimaryBg};
   width: 248px;
   height: 30px;
-  border: 1px solid rgba(86, 94, 239, 1);
+  border: 1px solid ${({ theme }) => theme.buttonPrimaryBg};
   border-radius: 4px;
   padding: 8px 10px;
 `;
@@ -84,11 +90,11 @@ export const FormGroup = styled.div`
     font-weight: 400;
     font-size: 14px;
     line-height: 150%;
-    color: rgba(148, 166, 190, 0.4);
+    color: ${({ theme }) => theme.textSecondary};
   }
 
   a {
-    color: rgba(148, 166, 190, 0.4);
+    color: ${({ theme }) => theme.textSecondary};
     text-decoration: underline;
   }
 `;

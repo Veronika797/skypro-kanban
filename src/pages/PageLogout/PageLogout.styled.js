@@ -26,12 +26,12 @@ export const Container = styled.div`
 export const Block = styled.div`
 display: block;
   margin: 0 auto;
-  background-color: #ffffff;
+   background-color: ${({ theme }) => theme.cardBg};
   max-width: 370px;
   width: 100%;
   padding: 50px 60px;
   border-radius: 10px;
-  border: 0.7px solid #d4dbe5;
+ border: ${({ theme }) => theme.border};
   box-shadow: 0px 4px 67px -12px rgba(0, 0, 0, 0.13);
 }
 `;
@@ -44,6 +44,7 @@ export const Title = styled.div`
     line-height: 30px;
     letter-spacing: -0.4px;
     margin-bottom: 20px;
+    color: ${({ theme }) => theme.text};
   }
 `;
 
@@ -62,7 +63,7 @@ export const FormGroup = styled.div`
 export const ButtonYes = styled.button`
   width: 153px;
   height: 30px;
-  background-color: #565eef;
+  background-color: ${({ theme }) => theme.buttonPrimaryBg};
   border-radius: 4px;
   border: none;
   outline: none;
@@ -73,13 +74,13 @@ export const ButtonYes = styled.button`
   line-height: 21px;
   font-weight: 500;
   letter-spacing: -0.14px;
-  color: #ffffff;
+  color: ${({ theme }) => theme.buttonPrimaryText};
   margin-right: 10px;
 
   a {
     width: 100%;
     height: 100%;
-    color: #ffffff;
+    color: ${({ theme }) => theme.buttonPrimaryText};
     display: flex;
     align-items: center;
     justify-content: center;
@@ -89,9 +90,9 @@ export const ButtonYes = styled.button`
 export const ButtonNo = styled.button`
   width: 153px;
   height: 30px;
-  background-color: transparent;
+  background-color: ${({ theme }) => theme.buttonSecondaryBg};
   border-radius: 4px;
-  border: 0.7px solid var(--palette-navy-60, #565eef);
+  border: ${({ theme }) => theme.buttonSecondaryBorder};
   outline: none;
   display: flex;
   align-items: center;
@@ -100,12 +101,12 @@ export const ButtonNo = styled.button`
   line-height: 21px;
   font-weight: 500;
   letter-spacing: -0.14px;
-  color: #565eef;
+  color: ${({ theme }) => theme.buttonSecondaryText};
 
   a {
     width: 100%;
     height: 100%;
-    color: #565eef;
+    color: ${({ theme }) => theme.buttonSecondaryText};
     display: flex;
     align-items: center;
     justify-content: center;

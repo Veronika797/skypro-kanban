@@ -1,13 +1,10 @@
 import styled from "styled-components";
 
 export const Col = styled.div`
-  margin: 0 auto;
   display: block;
 
   @media screen and (max-width: 1200px) {
     width: 100%;
-    margin: 0 auto;
-    display: block;
   }
 `;
 
@@ -17,14 +14,14 @@ export const Name = styled.div`
   margin: 15px 0;
 
   p {
-    color: #94a6be;
+    color: ${({ theme }) => theme.textSecondary};
     font-size: 14px;
     font-weight: 600;
     line-height: 1;
     text-transform: uppercase;
 
     @media screen and (max-width: 1200px) {
-      color: #94a6be;
+      color: ${({ theme }) => theme.textSecondary};
       font-size: 14px;
       font-weight: 600;
       line-height: 1;
@@ -32,7 +29,7 @@ export const Name = styled.div`
     }
   }
 
-  @media screen and (max-width: 1200px) {
+  @media screen and (max-width: 1267px) {
     display: flex;
     padding: 0 10px;
     margin: 15px 0;
@@ -40,15 +37,17 @@ export const Name = styled.div`
 `;
 
 export const Crds = styled.div`
+  display: flex;
+  overflow: auto;
+  white-space: nowrap;
   width: 100%;
   position: relative;
   display: flex;
   flex-direction: column;
   gap: 20px;
 
-  @media screen and (max-width: 1200px) {
+  @media screen and (max-width: 1255px) {
     flex-direction: row;
-    flex-wrap: wrap;
     gap: 10px;
   }
 `;

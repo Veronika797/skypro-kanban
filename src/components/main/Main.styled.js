@@ -1,37 +1,52 @@
 import styled from "styled-components";
 
 export const MainContent = styled.div`
-  max-width: 1260px;
-  margin: 0 auto;
-  padding: 0 30px;
+  width: 100%;
 `;
+
 export const Container = styled.div`
   width: 100%;
 `;
+
 export const Block = styled.div`
   width: 100%;
-  margin: 0 auto;
-  padding: 25px 0 49px;
+  padding-left: calc(50% - 600px);
+  padding-right: calc(50% - 600px);
 
-  @media screen and (max-width: 1200px) {
-    width: 100%;
-    margin: 0 auto;
-    padding: 30px 0;
+  @media (min-width: 1094px) and (max-width: 1255px) {
+    padding-left: calc(50% - 493px);
+  }
+
+  @media (min-width: 850px) and (max-width: 1093px) {
+    padding-left: calc(50% - 400px);
+  }
+
+  @media (min-width: 426px) and (max-width: 849px) {
+    padding-left: 24px;
+  }
+
+  @media screen and (max-width: 425px) {
+    padding-left: 16px;
   }
 `;
+
 export const Content = styled.div`
   width: 100%;
 
   @media screen and (max-width: 1200px) {
     display: block;
   }
+
+  @media (min-width: 320px) and (max-width: 502px) {
+    height: 710px;
+  }
 `;
 
 export const ColumnsContent = styled.div`
   display: flex;
-  gap: 10px;
+  gap: 25px;
 
-  @media screen and (max-width: 1200px) {
+  @media screen and (max-width: 1267px) {
     display: flex;
     flex-direction: column;
     padding-bottom: 30px;

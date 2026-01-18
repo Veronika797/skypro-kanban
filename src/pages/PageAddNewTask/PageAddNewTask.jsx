@@ -81,11 +81,8 @@ const PageAddNewTask = () => {
 
     try {
       const updatedTasks = await addTasks(body);
-
       setAllCards(updatedTasks);
-
       setSuccessMessage("Задача успешно добавлена!");
-
       setTaskName("");
       setTaskDescription("");
       setTaskStatus("");
@@ -152,7 +149,6 @@ const PageAddNewTask = () => {
                         placeholder="Введите описание задачи..."
                         value={taskDescription}
                         onChange={handleTaskDescriptionChange}
-                        // required
                         style={{
                           border: inputErrors.taskDescription
                             ? "2px solid red"

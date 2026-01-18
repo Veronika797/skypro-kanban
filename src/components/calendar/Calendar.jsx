@@ -9,9 +9,10 @@ import {
   NavActions,
   NavAction,
   CalendarContent,
-  CalendarDaysNames,
   DayName,
-  CalendarCells,
+  CalendarGrid,
+  DayColumn,
+  DayCells,
   CalendarCell,
 } from "./Calendar.styled";
 
@@ -30,65 +31,65 @@ const monthNames = [
   "Декабрь",
 ];
 
+const dayNames = ["пн", "вт", "ср", "чт", "пт", "сб", "вс"];
+
 const Calendar = ({ date }) => {
   const [currentDate, setCurrentDate] = useState(new Date());
   const [selectedDate, setSelectedDate] = useState(
-    date ? new Date(date) : null
+    date ? new Date(date) : null,
   );
 
   useEffect(() => {
     setSelectedDate(date ? new Date(date) : null);
   }, [date]);
 
-  const handleDateChange = (day) => {
-    const newDate = new Date(
-      currentDate.getFullYear(),
-      currentDate.getMonth(),
-      day
-    );
-    setSelectedDate(newDate);
+  const handleDateChange = (day, dayIndex) => {
+    const year = currentDate.getFullYear();
+    const month = currentDate.getMonth();
+    const firstDate = new Date(year, month, 1);
+    const firstDayOfWeek =
+      firstDate.getDay() === 0 ? 6 : firstDate.getDay() - 1;
+
+    const offset = day - 1;
+    const targetDay = new Date(year, month, 1 + offset);
+
+    if (targetDay.getMonth() !== month) return;
+
+    setSelectedDate(targetDay);
   };
 
   const handleMonthChange = (delta) => {
-    const newDate = new Date(
-      currentDate.setMonth(currentDate.getMonth() + delta)
-    );
-    setCurrentDate(newDate);
+    setCurrentDate((prev) => {
+      const newDate = new Date(prev);
+      newDate.setMonth(prev.getMonth() + delta);
+      return newDate;
+    });
   };
 
-  const generateCalendarCells = () => {
-    const cells = [];
+  const generateGrid = () => {
     const year = currentDate.getFullYear();
     const month = currentDate.getMonth();
-    const totalDaysInMonth = new Date(year, month + 1, 0).getDate();
-    const firstDayOfWeek = new Date(year, month, 1).getDay();
-    const offset = firstDayOfWeek === 0 ? 6 : firstDayOfWeek - 1;
+    const daysInMonth = new Date(year, month + 1, 0).getDate();
+    const firstDay = new Date(year, month, 1).getDay();
+    const startOffset = firstDay === 0 ? 6 : firstDay - 1;
 
-    for (let i = 0; i < offset; i++) {
-      cells.push(<CalendarCell key={`prev-${i}`}></CalendarCell>);
+    const weeks = [[], [], [], [], [], []];
+    let weekIndex = 0;
+
+    for (let i = 0; i < startOffset; i++) {
+      weeks[0].push(null);
     }
 
-    for (let day = 1; day <= totalDaysInMonth; day++) {
-      cells.push(
-        <CalendarCell
-          key={day}
-          className={`cell-day ${
-            new Date(year, month, day).getDay() % 6 === 0 ? "weekend" : ""
-          }`}
-          onClick={() => handleDateChange(day)}
-        >
-          {day}
-        </CalendarCell>
-      );
+    for (let day = 1; day <= daysInMonth; day++) {
+      const dayOfWeek = (startOffset + day - 1) % 7;
+      if (dayOfWeek === 0 && day > 1) weekIndex++;
+      weeks[weekIndex].push(day);
     }
 
-    const totalSlots = Math.ceil(cells.length / 7) * 7;
-    for (let i = cells.length; i < totalSlots; i++) {
-      cells.push(<CalendarCell key={`next-${i}`}></CalendarCell>);
-    }
-
-    return cells;
+    return weeks;
   };
+
+  const weeks = generateGrid();
 
   const formatSelectedDate = (date) => {
     if (!date) return "Дата не выбрана";
@@ -131,13 +132,54 @@ const Calendar = ({ date }) => {
               </NavAction>
             </NavActions>
           </CalendarNav>
+
           <CalendarContent>
-            <CalendarDaysNames>
-              {["пн", "вт", "ср", "чт", "пт", "сб", "вс"].map((day, index) => (
-                <DayName key={index}>{day}</DayName>
+            <CalendarGrid>
+              {dayNames.map((day, dayIndex) => (
+                <DayColumn key={dayIndex}>
+                  <DayName>{day}</DayName>
+                  <DayCells>
+                    {weeks.map((week, weekIndex) => {
+                      const dayValue = week[dayIndex];
+                      const fullDate = dayValue
+                        ? new Date(
+                            currentDate.getFullYear(),
+                            currentDate.getMonth(),
+                            dayValue,
+                          )
+                        : null;
+
+                      const isWeekend = dayIndex === 5 || dayIndex === 6;
+
+                      const isSelected =
+                        selectedDate &&
+                        fullDate &&
+                        selectedDate.getDate() === fullDate.getDate() &&
+                        selectedDate.getMonth() === fullDate.getMonth();
+
+                      return (
+                        <CalendarCell
+                          key={`${weekIndex}-${dayValue}`}
+                          onClick={() =>
+                            dayValue && handleDateChange(dayValue, dayIndex)
+                          }
+                          className={[
+                            dayValue ? "cell-day" : "other-month",
+                            isWeekend ? "weekend" : "",
+                            isSelected ? "active-day" : "",
+                          ]
+                            .join(" ")
+                            .trim()}
+                          title={fullDate ? fullDate.toDateString() : ""}
+                        >
+                          {dayValue || ""}
+                        </CalendarCell>
+                      );
+                    })}
+                  </DayCells>
+                </DayColumn>
               ))}
-            </CalendarDaysNames>
-            <CalendarCells>{generateCalendarCells()}</CalendarCells>
+            </CalendarGrid>
           </CalendarContent>
           <p>
             Срок исполнения: <span>{formatSelectedDate(selectedDate)}</span>

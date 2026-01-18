@@ -21,10 +21,13 @@ import {
 } from "./Header.styled";
 import { Link, useNavigate } from "react-router";
 import { TaskContext } from "../../context/TaskContext";
+import { ThemeContext } from "../../context/ThemeContext";
 
 const Header = ({ openNewCard, closeNewCard }) => {
   const { loading } = useContext(TaskContext);
   const navigate = useNavigate();
+
+  const { isDark, toggleTheme } = useContext(ThemeContext);
 
   const handleLogout = () => {
     navigate("/exit");
@@ -35,17 +38,15 @@ const Header = ({ openNewCard, closeNewCard }) => {
       {loading ? (
         ""
       ) : (
-        <Block>
+        <Block center>
           <Container>
             <Content>
               <Link to="/">
                 <Logo>
-                  <img src="images/logo.png" alt="logo"></img>
-                </Logo>
-              </Link>
-              <Link to="/">
-                <Logo>
-                  <img src="images/logo_dark.png" alt="logo"></img>
+                  <img
+                    src={isDark ? "images/logo_dark.png" : "images/logo.png"}
+                    alt="logo"
+                  />
                 </Logo>
               </Link>
               <Nav>
@@ -68,7 +69,8 @@ const Header = ({ openNewCard, closeNewCard }) => {
                       <ThemeTitle>Темная тема</ThemeTitle>
                       <ThemeCheckbox
                         type="checkbox"
-                        name="checkbox"
+                        checked={isDark}
+                        onChange={toggleTheme}
                       ></ThemeCheckbox>
                     </ThemeSection>
                     <PopUserButton>
