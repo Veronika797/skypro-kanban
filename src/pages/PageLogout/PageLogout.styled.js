@@ -74,7 +74,7 @@ export const ButtonYes = styled.button`
   line-height: 21px;
   font-weight: 500;
   letter-spacing: -0.14px;
-  color: ${({ theme }) => theme.buttonPrimaryText};
+  color: ${({ theme }) => theme.whiteText};
   margin-right: 10px;
 
   a {
@@ -92,7 +92,7 @@ export const ButtonNo = styled.button`
   height: 30px;
   background-color: ${({ theme }) => theme.buttonSecondaryBg};
   border-radius: 4px;
-  border: ${({ theme }) => theme.buttonSecondaryBorder};
+  border: ${({ theme }) => theme.borderBg};
   outline: none;
   display: flex;
   align-items: center;
@@ -101,7 +101,7 @@ export const ButtonNo = styled.button`
   line-height: 21px;
   font-weight: 500;
   letter-spacing: -0.14px;
-  color: ${({ theme }) => theme.buttonSecondaryText};
+  color: ${({ theme }) => theme.buttonPrimaryText};
 
   a {
     width: 100%;

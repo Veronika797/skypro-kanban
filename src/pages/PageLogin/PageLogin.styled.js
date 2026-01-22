@@ -12,7 +12,6 @@ export const Background = styled.div`
 
 export const ModalWindow = styled.div`
   width: 368px;
-  height: 329px;
   background: ${({ theme }) => theme.cardBg};
   box-shadow: 0px 4px 67px -12px rgba(0, 0, 0, 0.13);
   border: ${({ theme }) => theme.border};
@@ -20,7 +19,6 @@ export const ModalWindow = styled.div`
 `;
 
 export const WindowModal = styled.div`
-  height: 229px;
   margin: 50px 60px;
   width: 248px;
 `;

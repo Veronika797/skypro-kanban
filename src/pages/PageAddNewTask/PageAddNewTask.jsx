@@ -22,12 +22,11 @@ import {
   Wrap,
 } from "./PageAddNewTask.styled";
 import { addTasks } from "../../services/posts";
-import { categories } from "../../data";
 import { TaskContext } from "../../context/TaskContext";
 
 const PageAddNewTask = () => {
-  const { setAllCards } = useContext(TaskContext);
-
+  const { setAllCards, dictionary } = useContext(TaskContext);
+  const { categories } = dictionary;
   const navigate = useNavigate();
   const [taskName, setTaskName] = useState("");
   const [taskCategory, setTaskCategory] = useState(null);
@@ -157,7 +156,11 @@ const PageAddNewTask = () => {
                       />
                     </FormBlock>
                   </TaskNameAndDescr>
-                  <Calendar />
+                  <Calendar
+                    date={taskDate}
+                    edditable={true}
+                    onChange={setTaskDate}
+                  />
                 </FormTask>
                 <CategoriesContainer>
                   <CategoriesTitle>Категория</CategoriesTitle>

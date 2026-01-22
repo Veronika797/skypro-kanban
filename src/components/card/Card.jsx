@@ -11,10 +11,12 @@ import {
   Title,
   Text,
 } from "./Card.styled";
-import { categories } from "../../data";
-import { useState } from "react";
+import { TaskContext } from "../../context/TaskContext";
+import { useContext, useState } from "react";
 
-const formatDate = (date) => {
+const formatDate = (dateString) => {
+  const date = new Date(dateString);
+
   const day = String(date.getDate()).padStart(2, "0");
   const month = String(date.getMonth() + 1).padStart(2, "0");
   const year = String(date.getFullYear()).slice(-2);
@@ -22,7 +24,11 @@ const formatDate = (date) => {
 };
 
 const Card = ({ id, card }) => {
-  const taskDate = formatDate(new Date());
+  const { dictionary } = useContext(TaskContext);
+  const { categories } = dictionary;
+
+  const taskDate = card.date ? formatDate(card.date) : "—";
+
   const [taskCategory, setTaskCategory] = useState(card.topic);
   const navigate = useNavigate();
 
@@ -34,10 +40,6 @@ const Card = ({ id, card }) => {
     e.stopPropagation();
     navigate(`/card/${id}`);
   };
-
-  const category = categories.find((item) => {
-    return item.name === card.topic;
-  });
 
   return (
     <>

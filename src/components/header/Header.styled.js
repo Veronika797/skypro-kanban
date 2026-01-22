@@ -37,6 +37,7 @@ export const Content = styled.div`
   flex-wrap: nowrap;
   align-items: center;
   justify-content: space-between;
+  position: relative;
 
   @media screen and (max-width: 1225px) {
     padding: 0;
@@ -139,6 +140,10 @@ export const SetUser = styled.div`
   padding: 22px;
   text-align: start;
   z-index: 2;
+
+  @media (max-width: 1200px) {
+    right: 24px;
+  }
 `;
 
 export const CloseButton = styled.a`
@@ -156,7 +161,7 @@ export const CloseButton = styled.a`
 
 export const UserName = styled.p`
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   color: ${({ theme }) => theme.text};
   font-size: 14px;
   font-weight: 500;
@@ -198,7 +203,6 @@ export const ThemeCheckbox = styled.input.attrs({ type: "checkbox" })`
   padding: 1px;
   cursor: pointer;
   margin: 0;
-  padding: 0;
   transition: 0.3s;
   transform: translateX(10px);
   flex-shrink: 0;

@@ -22,17 +22,20 @@ import {
 } from "../../pages/PageEditCard/PageEditCard.styled";
 import Calendar from "../../components/calendar/Calendar";
 import { deleteTask, updateTask } from "../../services/posts";
-import { categories, columnsData } from "../../data";
 import { useContext, useState } from "react";
 import { TaskContext } from "../../context/TaskContext";
 
 const FormUpdateCard = ({ card }) => {
-  const { setAllCards } = useContext(TaskContext);
+  const { setAllCards, dictionary, refreshTasks } = useContext(TaskContext);
+  const { categories, columnsData } = dictionary;
+
   const navigate = useNavigate();
   const [taskStatus, setTaskStatus] = useState(card.status);
   const [edditable, setEdditable] = useState(false);
   const [taskDescription, setTaskDescription] = useState(card.description);
-  const [taskDate, setTaskDate] = useState(card.date);
+  const [taskDate, setTaskDate] = useState(
+    card.date ? new Date(card.date) : new Date(),
+  );
   const [textError, setTextError] = useState("");
   const [taskCategory, setTaskCategory] = useState(card.topic);
 
@@ -46,20 +49,10 @@ const FormUpdateCard = ({ card }) => {
       status: taskStatus,
       description: taskDescription,
       topic: taskCategory,
-      date: taskDate,
+      date: taskDate.toISOString(),
     })
       .then(() => {
-        setAllCards((cards) =>
-          cards.map((item) => {
-            if (item._id === card._id) {
-              item.status = taskStatus;
-              item.description = taskDescription;
-              item.topic = taskCategory;
-              item.date = taskDate;
-            }
-            return item;
-          })
-        );
+        refreshTasks();
         navigate("/");
       })
       .catch((error) => {
@@ -145,7 +138,11 @@ const FormUpdateCard = ({ card }) => {
                   />
                 </FormBlock>
               </FormContent>
-              <Calendar date={card.date} edditable={edditable} />
+              <Calendar
+                date={taskDate}
+                edditable={edditable}
+                onChange={setTaskDate}
+              />
             </FormWrap>
             <ButtonWrapper>
               <ButtonGroup>

@@ -12,12 +12,11 @@ import {
   ModalWindow,
 } from "./PageLogin.styled";
 import { useContext, useState } from "react";
-import { login } from "../../services/auth";
+import { login as apiLogin } from "../../services/auth";
 import { AuthContext } from "../../context/AuthContext";
 
 function PageLogin() {
-  const { setIsAuth } = useContext(AuthContext);
-
+  const { login: loginContext } = useContext(AuthContext);
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -31,25 +30,23 @@ function PageLogin() {
     e.preventDefault();
 
     if (!email || !password) {
-      const errors = {
+      return setTextError({
         email: !email ? "Веедите email" : "",
         password: !password ? "Веедите пароль" : "",
-      };
-      return setTextError(errors);
+      });
     }
 
-    login({
+    apiLogin({
       login: email,
       password: password,
     })
       .then((data) => {
-        console.log(data);
-        localStorage.setItem("token", data.user.token);
-        setIsAuth(true);
+        console.log("Успешный вход:", data);
+        loginContext(data.user);
         navigate("/");
       })
       .catch((error) => {
-        console.log(error);
+        console.log("Ошибка входа:", error);
         setTextError({ service: error.response.data.error });
       });
   };

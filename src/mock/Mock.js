@@ -1,4 +1,4 @@
-export const categories = [
+export const MOCK_CATEGORIES = [
   { id: 1, name: "Учеба", className: "orange" },
   { id: 2, name: "Здоровье", className: "green" },
   { id: 3, name: "Отдых", className: "purple" },
@@ -7,7 +7,7 @@ export const categories = [
   { id: 6, name: "Путешествия", className: "yellow" },
 ];
 
-export const columnsData = [
+export const MOCK_COLUMNS = [
   { title: "Без статуса", status: "no-status", className: "yellow" },
   { title: "Нужно сделать", status: "to-do", className: "purple" },
   { title: "В работе", status: "in-progress", className: "blue" },

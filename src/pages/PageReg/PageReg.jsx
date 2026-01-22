@@ -12,11 +12,11 @@ import {
   WindowModal,
 } from "./PageReg.styled";
 import { useContext, useState } from "react";
-import { reg } from "../../services/auth";
+import { reg as apiReg } from "../../services/auth";
 import { AuthContext } from "../../context/AuthContext";
 
 function PageReg() {
-  const { setIsAuth } = useContext(AuthContext);
+  const { login: loginContext } = useContext(AuthContext);
   const navigate = useNavigate();
   const [userName, setUserName] = useState("");
   const [email, setEmail] = useState("");
@@ -31,20 +31,18 @@ function PageReg() {
     e.preventDefault();
 
     if (!userName || !email || !password) {
-      const errors = {
+      return setTextError({
         userName: !userName ? "Веедите имя" : "",
         email: !email ? "Веедите email" : "",
         password: !password ? "Веедите пароль" : "",
-      };
-      return setTextError(errors);
+      });
     }
 
-    reg({ login: email, name: userName, password: password })
+    apiReg({ login: email, name: userName, password: password })
       .then((data) => {
-        console.log(data);
-        localStorage.setItem("token", data.user.token);
+        console.log("Регистрация успешна:", data);
+        loginContext(data.user);
         alert("Регистрация прошла успешно");
-        setIsAuth(true);
         navigate("/");
       })
       .catch((error) => {
@@ -103,16 +101,7 @@ function PageReg() {
             {textError.service && (
               <p style={{ color: "red" }}>{textError.service}</p>
             )}
-            <ButtonEnter
-              type="submit"
-              // disabled={
-              //   textError.userName && textError.email && textError.password
-              //     ? false
-              //     : true
-              // }
-            >
-              Зарегистрироваться
-            </ButtonEnter>
+            <ButtonEnter type="submit">Зарегистрироваться</ButtonEnter>
             <FormGroup>
               <p>
                 Уже есть аккаунт?

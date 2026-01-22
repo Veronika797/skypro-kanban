@@ -109,6 +109,64 @@ const GlobalStyle = createGlobalStyle`
   ._active-category {
     opacity: 1 !important;
   }  
+
+  .content {
+  width: 100%;
+  margin: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+.loading {
+  font-size: 28px;
+  color: #000;
+}
+
+.skeleton-container {
+  width: 100%;
+  display: flex;
+  gap: 10px;
+  margin: 0 auto;
+  padding: 10px 0;
+  justify-content: center;
+  align-items: center;
+}
+
+@media screen and (max-width: 1439px) {
+  .skeleton-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+._btn-bor {
+  border-radius: 4px;
+  border: 0.7px solid var(--palette-navy-60, #565eef);
+  outline: none;
+  background: transparent;
+  color: #565eef;
+}
+._btn-bg {
+  border-radius: 4px;
+  background: #565eef;
+  border: none;
+  outline: none;
+  color: #ffffff;
+}
+
+._hide {
+  display: none;
+}
+
+._dark {
+  display: none;
+}
+
 `;
 
 export default GlobalStyle;

@@ -33,7 +33,7 @@ const monthNames = [
 
 const dayNames = ["пн", "вт", "ср", "чт", "пт", "сб", "вс"];
 
-const Calendar = ({ date }) => {
+const Calendar = ({ date, onChange }) => {
   const [currentDate, setCurrentDate] = useState(new Date());
   const [selectedDate, setSelectedDate] = useState(
     date ? new Date(date) : null,
@@ -43,19 +43,14 @@ const Calendar = ({ date }) => {
     setSelectedDate(date ? new Date(date) : null);
   }, [date]);
 
-  const handleDateChange = (day, dayIndex) => {
+  const handleDateChange = (dayValue) => {
+    if (!dayValue) return;
+
     const year = currentDate.getFullYear();
     const month = currentDate.getMonth();
-    const firstDate = new Date(year, month, 1);
-    const firstDayOfWeek =
-      firstDate.getDay() === 0 ? 6 : firstDate.getDay() - 1;
-
-    const offset = day - 1;
-    const targetDay = new Date(year, month, 1 + offset);
-
-    if (targetDay.getMonth() !== month) return;
-
-    setSelectedDate(targetDay);
+    const selectedDate = new Date(year, month, dayValue);
+    onChange(selectedDate);
+    setSelectedDate(selectedDate);
   };
 
   const handleMonthChange = (delta) => {
@@ -85,7 +80,6 @@ const Calendar = ({ date }) => {
       if (dayOfWeek === 0 && day > 1) weekIndex++;
       weeks[weekIndex].push(day);
     }
-
     return weeks;
   };
 
@@ -160,9 +154,7 @@ const Calendar = ({ date }) => {
                       return (
                         <CalendarCell
                           key={`${weekIndex}-${dayValue}`}
-                          onClick={() =>
-                            dayValue && handleDateChange(dayValue, dayIndex)
-                          }
+                          onClick={() => dayValue && handleDateChange(dayValue)}
                           className={[
                             dayValue ? "cell-day" : "other-month",
                             isWeekend ? "weekend" : "",

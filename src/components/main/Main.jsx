@@ -1,5 +1,4 @@
 import Column from "../column/Column";
-import { columnsData } from "../../data";
 import {
   Block,
   ColumnsContent,
@@ -12,7 +11,9 @@ import { useContext } from "react";
 import { TaskContext } from "../../context/TaskContext";
 
 const Main = () => {
-  const { loading, allCards } = useContext(TaskContext);
+  const { loading, allCards, dictionary } = useContext(TaskContext);
+  const { columnsData } = dictionary;
+
   return (
     <MainContent>
       <Container>
@@ -34,7 +35,7 @@ const Main = () => {
                     column.title.toLowerCase() === "без статуса"
                       ? card.status.toLowerCase() === "без статуса"
                       : card.status.toLowerCase() ===
-                        column.status.toLowerCase()
+                        column.status.toLowerCase(),
                   );
                   return (
                     <Column
