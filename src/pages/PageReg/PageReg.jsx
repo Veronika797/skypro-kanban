@@ -1,15 +1,15 @@
 import { Link, Navigate, useNavigate } from "react-router";
 import {
-  AuthInput,
   Background,
+  ModalWindow,
+  WindowModal,
+  Title,
+  FormModal,
+  InputWrapper,
+  AuthInput,
+  InputPassword,
   ButtonEnter,
   FormGroup,
-  FormModal,
-  InputPassword,
-  InputWrapper,
-  ModalWindow,
-  Title,
-  WindowModal,
 } from "./PageReg.styled";
 import { useContext, useState } from "react";
 import { reg } from "../../services/auth";

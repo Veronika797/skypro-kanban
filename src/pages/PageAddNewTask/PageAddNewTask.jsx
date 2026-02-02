@@ -36,6 +36,10 @@ const PageAddNewTask = () => {
   const [taskDate, setTaskDate] = useState(new Date());
   const [textError, setTextError] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
+  const [inputErrors, setInputErrors] = useState({
+    taskName: false,
+    taskDescription: false,
+  });
 
   const handleTaskNameChange = (e) => {
     setTaskName(e.target.value);
@@ -54,6 +58,17 @@ const PageAddNewTask = () => {
     setTextError("");
     setSuccessMessage("");
 
+    const errors = {
+      taskName: !taskName.trim(),
+      taskDescription: !taskDescription.trim(),
+    };
+
+    setInputErrors(errors);
+
+    if (errors.taskName || errors.taskDescription) {
+      return;
+    }
+
     const body = {
       title: taskName || "Новая задача",
       topic: taskCategory
@@ -63,8 +78,6 @@ const PageAddNewTask = () => {
       description: taskDescription || "",
       date: taskDate.toISOString(),
     };
-
-    // console.log("Отправляемый объект задачи:", body);
 
     try {
       const updatedTasks = await addTasks(body);
@@ -125,7 +138,12 @@ const PageAddNewTask = () => {
                         onChange={handleTaskNameChange}
                         autoFocus
                         required
-                      ></Input>
+                        style={{
+                          border: inputErrors.taskName
+                            ? "2px solid red"
+                            : "normal",
+                        }}
+                      />
                     </FormBlock>
                     <FormBlock>
                       <p>Описание задачи</p>
@@ -134,6 +152,11 @@ const PageAddNewTask = () => {
                         placeholder="Введите описание задачи..."
                         value={taskDescription}
                         onChange={handleTaskDescriptionChange}
+                        style={{
+                          border: inputErrors.taskDescription
+                            ? "2px solid red"
+                            : "normal",
+                        }}
                       />
                     </FormBlock>
                   </TaskNameAndDescr>

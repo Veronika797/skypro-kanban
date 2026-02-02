@@ -1,39 +1,46 @@
 import styled from "styled-components";
 
 export const MainContent = styled.div`
-  max-width: 1260px;
-  margin: 0 auto;
-  padding: 0 30px;
+  width: 100%;
+  overflow: scroll;
+  scroll-behavior: smooth;
+  background-color: ${({ theme }) => theme.bodyBg};
 `;
+
 export const Container = styled.div`
   width: 100%;
+  height: 1078px;
 `;
+
 export const Block = styled.div`
   width: 100%;
-  margin: 0 auto;
-  padding: 25px 0 49px;
+  padding-left: calc(50% - 600px);
+  padding-right: calc(50% - 600px);
 
-  @media screen and (max-width: 1200px) {
-    width: 100%;
-    margin: 0 auto;
-    padding: 30px 0;
+  @media screen and (max-width: 376px) {
+    padding-left: 16px;
   }
 `;
+
 export const Content = styled.div`
   width: 100%;
+  padding-top: 32px;
 
-  @media screen and (max-width: 1200px) {
-    display: block;
+  @media (max-width: 376px) {
+    height: 710px;
+    padding-top: 16px;
   }
 `;
 
 export const ColumnsContent = styled.div`
   display: flex;
-  gap: 10px;
+  gap: 25px;
 
-  @media screen and (max-width: 1200px) {
+  @media screen and (max-width: 376px) {
+    max-height: 810px;
     display: flex;
     flex-direction: column;
+    gap: 15px;
     padding-bottom: 30px;
   }
 `;

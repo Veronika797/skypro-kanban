@@ -1,28 +1,28 @@
 import styled from "styled-components";
 
 export const Block = styled.div`
-  width: 100%;
-  margin: 0 auto;
-  background-color: #ffffff;
+  padding-left: calc(50% - 600px);
+  padding-right: calc(50% - 600px);
+  background-color: ${({ theme }) => theme.cardBg};
+  border-bottom: ${({ theme }) => theme.border};
+
+  @media screen and (max-width: 376px) {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
 `;
 
 export const Container = styled.div`
   width: 100%;
-  margin: 0 auto;
-  padding: 0 30px;
-
-  @media screen and (max-width: 495px) {
-    width: 100%;
-    padding: 0 16px;
-  }
 `;
 export const Content = styled.div`
+  position: relative;
   height: 70px;
   display: flex;
   flex-wrap: nowrap;
   align-items: center;
   justify-content: space-between;
-  position: relative;
+
   top: 0;
   left: 0;
   padding: 0 10px;
@@ -35,9 +35,29 @@ export const Logo = styled.div`
 export const Nav = styled.div` {
   max-width: 290px;
   padding: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+ width: 178px;
+  height: 30px;
+  border-radius: 4px;
+  background-color: ${({ theme }) => theme.buttonPrimaryBg};
+  color: ${({ theme }) => theme.whiteText};
+  border: none;
+  font-size: 14px;
+  line-height: 1;
+  font-weight: 500;
+  margin-right: 20px;
+
+    @media  (max-width: 376px) {
+      position: fixed;
+      width: 343px;
+      height: 40px;
+      opacity: 1;
+      top: 786px;
+      left: 16px;
+      padding-top: 10px;
+      padding-right: 14px;
+      padding-bottom: 10px;
+      padding-left: 14px;
+    }
 `;
 
 export const TaskAndName = styled.div`
@@ -58,15 +78,19 @@ export const Button = styled.button`
   font-weight: 500;
   margin-right: 20px;
 
-  @media screen and (max-width: 495px) {
-    z-index: 3;
-    position: static;
+  @media screen and (max-width: 376px) {
+    z-index: 2;
+    width: 343px;
+    height: 40px;
+    top: 93%;
     left: 16px;
-    bottom: 30px;
-    top: auto;
-    width: 160px;
+    opacity: 1;
     border-radius: 4px;
-    margin-right: 0;
+    padding-top: 10px;
+    padding-right: 14px;
+    padding-bottom: 10px;
+    padding-left: 14px;
+    position: fixed;
   }
 `;
 
@@ -74,34 +98,29 @@ export const User = styled.a`
   height: 20px;
   display: flex;
   flex-wrap: nowrap;
+  gap: 5px;
   align-items: center;
   justify-content: center;
   font-size: 14px;
   line-height: 20px;
-  color: #565eef;
+  color: ${({ theme }) => theme.buttonPrimaryText};
   text-decoration: none;
 
   &::after {
     content: "";
     display: block;
-    width: 6px;
-    height: 6px;
+    width: 6.5px;
+    height: 7px;
     border-radius: 1px;
-    border-left: 1.9px solid #565eef;
-    border-bottom: 1.9px solid #565eef;
+    border-left: 1.9px solid ${({ theme }) => theme.buttonPrimaryText};
+    border-bottom: 1.9px solid ${({ theme }) => theme.buttonPrimaryText};
     transform: rotate(-45deg);
-    margin: -6px 0 0 5px;
     padding: 0;
   }
 
   &:hover {
     color: #33399b;
     cursor: pointer;
-
-    &::after {
-      border-left-color: #33399b;
-      border-bottom-color: #33399b;
-    }
   }
 `;
 
@@ -113,29 +132,28 @@ export const SetUser = styled.div`
   width: 213px;
   height: 205px;
   border-radius: 10px;
-  border: 0.7px solid rgba(148, 166, 190, 0.4);
-  background: #fff;
+  border: ${({ theme }) => theme.border};
+  background: ${({ theme }) => theme.cardBg};
   box-shadow: 0px 10px 39px 0px rgba(26, 56, 101, 0.21);
   padding: 22px;
   text-align: start;
   z-index: 2;
 `;
 export const CloseButton = styled.a`
-  color: #000;
+  color: ${({ theme }) => theme.text};
   position: relative;
   font-size: 20px;
   left: 100%;
   text-decoration: none;
 
   &:hover {
-    color: #33399b;
     cursor: pointer;
   }
 `;
 export const UserName = styled.p`
   display: flex;
-  justify-content: center;
-  color: #000;
+  justify-content: flex-start;
+  color: ${({ theme }) => theme.text};
   font-size: 14px;
   font-weight: 500;
   line-height: 21px;
@@ -143,7 +161,7 @@ export const UserName = styled.p`
   margin-bottom: 4px;
 `;
 export const UserMail = styled.p`
-  color: #94a6be;
+  color: ${({ theme }) => theme.textSecondary};
   font-size: 14px;
   line-height: 21px;
   letter-spacing: -0.14px;
@@ -156,7 +174,7 @@ export const ThemeSection = styled.div`
   margin-bottom: 30px;
 `;
 export const ThemeTitle = styled.p`
-  color: #000;
+  color: ${({ theme }) => theme.text};
   font-size: 14px;
   line-height: 21px;
   letter-spacing: -0.14px;
@@ -181,7 +199,7 @@ export const ThemeCheckbox = styled.input.attrs({ type: "checkbox" })`
     width: 11px;
     height: 11px;
     border-radius: 50%;
-    background-color: #94a6be;
+    background-color: ${({ theme }) => theme.calendarCellActive};
     transition: 0.5s;
   }
 
@@ -198,11 +216,11 @@ export const ButtonStyled = styled.button`
   width: 72px;
   height: 30px;
   background: transparent;
-  color: rgba(86, 94, 239, 1);
+  color: ${({ theme }) => theme.buttonPrimaryText};
   border-radius: 4px;
-  border: 1px solid;
+  border: ${({ theme }) => theme.borderBg};
 `;
 
 export const ButtonLink = styled.span`
-  color: #565eef;
+  color: ${({ theme }) => theme.buttonPrimaryText};
 `;
