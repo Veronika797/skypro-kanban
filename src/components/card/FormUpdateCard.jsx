@@ -22,17 +22,17 @@ import {
 } from "../../pages/PageEditCard/PageEditCard.styled";
 import Calendar from "../../components/calendar/Calendar";
 import { deleteTask, updateTask } from "../../services/posts";
-import { categories, columnsData } from "../../data";
 import { useContext, useState } from "react";
 import { TaskContext } from "../../context/TaskContext";
 
 const FormUpdateCard = ({ card }) => {
-  const { setAllCards } = useContext(TaskContext);
+  const { setAllCards, dictionary } = useContext(TaskContext);
+  const { categories, columnsData } = dictionary;
   const navigate = useNavigate();
   const [taskStatus, setTaskStatus] = useState(card.status);
   const [edditable, setEdditable] = useState(false);
   const [taskDescription, setTaskDescription] = useState(card.description);
-  const [taskDate, setTaskDate] = useState(card.date);
+  const [taskDate, setTaskDate] = useState(new Date(card.date));
   const [textError, setTextError] = useState("");
   const [taskCategory, setTaskCategory] = useState(card.topic);
 
@@ -58,7 +58,7 @@ const FormUpdateCard = ({ card }) => {
               item.date = taskDate;
             }
             return item;
-          })
+          }),
         );
         navigate("/");
       })

@@ -16,7 +16,7 @@ import { login } from "../../services/auth";
 import { AuthContext } from "../../context/AuthContext";
 
 function PageLogin() {
-  const { setIsAuth } = useContext(AuthContext);
+  const { setIsAuth, setUser } = useContext(AuthContext);
 
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
@@ -43,9 +43,10 @@ function PageLogin() {
       password: password,
     })
       .then((data) => {
-        console.log(data);
         localStorage.setItem("token", data.user.token);
+        localStorage.setItem("user", JSON.stringify({ name: data.user.name, email: data.user.login }));
         setIsAuth(true);
+        setUser({ name: data.user.name, email: data.user.login });
         navigate("/");
       })
       .catch((error) => {

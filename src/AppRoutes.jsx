@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router";
+import { Route, Routes } from "react-router-dom";
 import Page404 from "./pages/Page404/Page404";
 import PageReg from "./pages/PageReg/PageReg";
 import PageLogin from "./pages/PageLogin/PageLogin";

@@ -33,7 +33,7 @@ const monthNames = [
 
 const dayNames = ["пн", "вт", "ср", "чт", "пт", "сб", "вс"];
 
-const Calendar = ({ date }) => {
+const Calendar = ({ date, onChange }) => {
   const [currentDate, setCurrentDate] = useState(new Date());
   const [selectedDate, setSelectedDate] = useState(
     date ? new Date(date) : null,
@@ -56,6 +56,9 @@ const Calendar = ({ date }) => {
     if (targetDay.getMonth() !== month) return;
 
     setSelectedDate(targetDay);
+    if (onChange) {
+      onChange(targetDay);
+    }
   };
 
   const handleMonthChange = (delta) => {

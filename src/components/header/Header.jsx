@@ -22,8 +22,10 @@ import {
 import { Link, useNavigate } from "react-router";
 import { TaskContext } from "../../context/TaskContext";
 import { ThemeContext } from "../../context/ThemeContext";
+import { AuthContext } from "../../context/AuthContext";
 
 const Header = ({ openNewCard, closeNewCard }) => {
+  const { user } = useContext(AuthContext);
   const { loading } = useContext(TaskContext);
   const navigate = useNavigate();
 
@@ -55,7 +57,9 @@ const Header = ({ openNewCard, closeNewCard }) => {
                     <Button>Создать новую задачу</Button>
                   </Link>
 
-                  <User href="#user-set-target">Ivan Ivanov</User>
+                  <User href="#user-set-target">
+                    {user?.name || "Пользователь"}
+                  </User>
                   <SetUser
                     className="header__pop-user-set pop-user-set"
                     id="user-set-target"
@@ -63,8 +67,8 @@ const Header = ({ openNewCard, closeNewCard }) => {
                     <CloseButton href="#" onClick={closeNewCard}>
                       x
                     </CloseButton>
-                    <UserName>Ivan Ivanov</UserName>
-                    <UserMail>ivan.ivanov@gmail.com</UserMail>
+                    <UserName>{user?.name || "Пользователь"}</UserName>
+                    <UserMail>{user?.email || ""}</UserMail>
                     <ThemeSection>
                       <ThemeTitle>Темная тема</ThemeTitle>
                       <ThemeCheckbox

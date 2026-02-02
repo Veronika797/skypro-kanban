@@ -1,5 +1,6 @@
 import Column from "../column/Column";
-import { columnsData } from "../../data";
+import { useContext } from "react";
+import { TaskContext } from "../../context/TaskContext";
 import {
   Block,
   ColumnsContent,
@@ -8,11 +9,10 @@ import {
   MainContent,
 } from "./Main.styled";
 import Skeleton from "../skeleton/Skeleton";
-import { useContext } from "react";
-import { TaskContext } from "../../context/TaskContext";
 
 const Main = () => {
-  const { loading, allCards } = useContext(TaskContext);
+  const { loading, allCards, dictionary } = useContext(TaskContext);
+  const { columnsData } = dictionary;
   return (
     <MainContent>
       <Container>
@@ -30,12 +30,23 @@ const Main = () => {
                 </div>
               ) : (
                 columnsData.map((column) => {
-                  const filteredCards = allCards.filter((card) =>
-                    column.title.toLowerCase() === "без статуса"
-                      ? card.status.toLowerCase() === "без статуса"
-                      : card.status.toLowerCase() ===
-                        column.status.toLowerCase()
-                  );
+                  const filteredCards = allCards.filter((card) => {
+                    const cardStatus = card.status
+                      ? card.status.toLowerCase()
+                      : "";
+                    const columnStatus = column.status.toLowerCase();
+
+                    if (columnStatus === "no-status") {
+                      return (
+                        !card.status ||
+                        cardStatus === "" ||
+                        cardStatus === "без статуса" ||
+                        cardStatus === "no-status"
+                      );
+                    } else {
+                      return cardStatus === columnStatus;
+                    }
+                  });
                   return (
                     <Column
                       key={column.status}

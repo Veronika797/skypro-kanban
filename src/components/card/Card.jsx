@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 import {
   Button,
   CardContainer,
@@ -11,7 +11,8 @@ import {
   Title,
   Text,
 } from "./Card.styled";
-import { categories } from "../../data";
+import { useContext } from "react";
+import { TaskContext } from "../../context/TaskContext";
 import { useState } from "react";
 
 const formatDate = (date) => {
@@ -22,7 +23,9 @@ const formatDate = (date) => {
 };
 
 const Card = ({ id, card }) => {
-  const taskDate = formatDate(new Date());
+  const { dictionary } = useContext(TaskContext);
+  const { categories } = dictionary;
+  const taskDate = formatDate(new Date(card.date));
   const [taskCategory, setTaskCategory] = useState(card.topic);
   const navigate = useNavigate();
 

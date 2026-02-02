@@ -1,4 +1,4 @@
-import { useParams } from "react-router";
+import { useParams } from "react-router-dom";
 import { getTask } from "../../services/posts";
 import { useEffect, useState } from "react";
 import FormUpdateCard from "../../components/card/FormUpdateCard";
