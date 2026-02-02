@@ -19,21 +19,15 @@ import {
   ButtonStyled,
   ButtonLink,
 } from "./Header.styled";
-import { Link, useNavigate } from "react-router";
+import { Link } from "react-router";
 import { TaskContext } from "../../context/TaskContext";
 import { ThemeContext } from "../../context/ThemeContext";
 import { AuthContext } from "../../context/AuthContext";
 
 const Header = ({ openNewCard, closeNewCard }) => {
-  const { user } = useContext(AuthContext);
+  const { user, handleLogout } = useContext(AuthContext);
   const { loading } = useContext(TaskContext);
-  const navigate = useNavigate();
-
   const { isDark, toggleTheme } = useContext(ThemeContext);
-
-  const handleLogout = () => {
-    navigate("/exit");
-  };
 
   return (
     <>

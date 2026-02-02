@@ -46,7 +46,7 @@ const FormUpdateCard = ({ card }) => {
       status: taskStatus,
       description: taskDescription,
       topic: taskCategory,
-      date: taskDate,
+      date: taskDate.toISOString(),
     })
       .then(() => {
         setAllCards((cards) =>
@@ -145,7 +145,7 @@ const FormUpdateCard = ({ card }) => {
                   />
                 </FormBlock>
               </FormContent>
-              <Calendar date={card.date} edditable={edditable} />
+              <Calendar date={taskDate} onChange={setTaskDate} />
             </FormWrap>
             <ButtonWrapper>
               <ButtonGroup>

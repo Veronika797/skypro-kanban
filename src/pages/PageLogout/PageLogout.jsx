@@ -13,14 +13,8 @@ import { useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
 
 function PageLogout() {
-  const { setIsAuth } = useContext(AuthContext);
+  const { handleLogout } = useContext(AuthContext);
   const navigate = useNavigate();
-
-  const handleLogout = () => {
-    localStorage.removeItem("token");
-    setIsAuth(false);
-    navigate("/login");
-  };
 
   return (
     <PopExit>

@@ -160,7 +160,10 @@ const PageAddNewTask = () => {
                       />
                     </FormBlock>
                   </TaskNameAndDescr>
-                  <Calendar date={taskDate} onChange={(date) => setTaskDate(date)} />
+                  <Calendar
+                    date={taskDate}
+                    onChange={(date) => setTaskDate(date)}
+                  />
                 </FormTask>
                 <CategoriesContainer>
                   <CategoriesTitle>Категория</CategoriesTitle>

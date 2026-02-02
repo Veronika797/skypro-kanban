@@ -12,11 +12,10 @@ import {
   ModalWindow,
 } from "./PageLogin.styled";
 import { useContext, useState } from "react";
-import { login } from "../../services/auth";
 import { AuthContext } from "../../context/AuthContext";
 
 function PageLogin() {
-  const { setIsAuth, setUser } = useContext(AuthContext);
+  const { handleLogin, setIsAuth, setUser } = useContext(AuthContext);
 
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
@@ -27,32 +26,26 @@ function PageLogin() {
     return <Navigate to="/" />;
   }
 
-  const handleLogin = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!email || !password) {
       const errors = {
-        email: !email ? "Веедите email" : "",
-        password: !password ? "Веедите пароль" : "",
+        email: !email ? "Введите email" : "",
+        password: !password ? "Введите пароль" : "",
       };
       return setTextError(errors);
     }
 
-    login({
-      login: email,
-      password: password,
-    })
-      .then((data) => {
-        localStorage.setItem("token", data.user.token);
-        localStorage.setItem("user", JSON.stringify({ name: data.user.name, email: data.user.login }));
-        setIsAuth(true);
-        setUser({ name: data.user.name, email: data.user.login });
-        navigate("/");
-      })
-      .catch((error) => {
-        console.log(error);
-        setTextError({ service: error.response.data.error });
+    try {
+      await handleLogin({ login: email, password: password });
+      navigate("/");
+    } catch (error) {
+      console.log(error);
+      setTextError({
+        service: error.response?.data?.error || "Ошибка авторизации",
       });
+    }
   };
 
   return (
@@ -60,7 +53,7 @@ function PageLogin() {
       <ModalWindow>
         <WindowModal>
           <Title>Вход</Title>
-          <FormModal id="form" onSubmit={handleLogin}>
+          <FormModal id="form" onSubmit={handleSubmit}>
             <InputWrapper>
               <AuthInput
                 style={{
@@ -86,13 +79,19 @@ function PageLogin() {
               />
             </InputWrapper>
             {textError.email && (
-              <p style={{ color: "red" }}>{textError.email}</p>
+              <p style={{ color: "red", fontSize: "12px" }}>
+                {textError.email}
+              </p>
             )}
             {textError.password && (
-              <p style={{ color: "red" }}>{textError.password}</p>
+              <p style={{ color: "red", fontSize: "12px" }}>
+                {textError.password}
+              </p>
             )}
             {textError.service && (
-              <p style={{ color: "red" }}>{textError.service}</p>
+              <p style={{ color: "red", fontSize: "12px" }}>
+                {textError.service}
+              </p>
             )}
             <ButtonEnter type="submit">Войти</ButtonEnter>
             <FormGroup>

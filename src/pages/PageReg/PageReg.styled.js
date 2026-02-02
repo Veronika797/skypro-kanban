@@ -12,7 +12,6 @@ export const Background = styled.div`
 
 export const ModalWindow = styled.div`
   width: 368px;
-  height: 345px;
   background: ${({ theme }) => theme.cardBg};
   box-shadow: 0px 4px 67px -12px rgba(0, 0, 0, 0.13);
   border: ${({ theme }) => theme.border};
@@ -26,7 +25,6 @@ export const ModalWindow = styled.div`
 `;
 
 export const WindowModal = styled.div`
-  height: 229px;
   margin: 50px 60px;
   width: 248px;
 `;
@@ -41,7 +39,6 @@ export const Title = styled.h2`
 
 export const FormModal = styled.form`
   display: flex;
-  gap: 7px;
   align-items: center;
   justify-content: center;
   flex-direction: column;
@@ -89,11 +86,12 @@ export const ButtonEnter = styled.button`
 
 export const FormGroup = styled.div`
   text-align: center;
+  padding-top: 10px;
 
   p {
     font-family: Roboto;
     font-weight: 400;
-    font-size: 14px;
+    font-size: 12px;
     line-height: 150%;
     color: ${({ theme }) => theme.textSecondary};
   }

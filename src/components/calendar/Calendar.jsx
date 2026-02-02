@@ -43,15 +43,10 @@ const Calendar = ({ date, onChange }) => {
     setSelectedDate(date ? new Date(date) : null);
   }, [date]);
 
-  const handleDateChange = (day, dayIndex) => {
+  const handleDateChange = (day) => {
     const year = currentDate.getFullYear();
     const month = currentDate.getMonth();
-    const firstDate = new Date(year, month, 1);
-    const firstDayOfWeek =
-      firstDate.getDay() === 0 ? 6 : firstDate.getDay() - 1;
-
-    const offset = day - 1;
-    const targetDay = new Date(year, month, 1 + offset);
+    const targetDay = new Date(year, month, day);
 
     if (targetDay.getMonth() !== month) return;
 
@@ -162,9 +157,7 @@ const Calendar = ({ date, onChange }) => {
                       return (
                         <CalendarCell
                           key={`${weekIndex}-${dayValue}`}
-                          onClick={() =>
-                            dayValue && handleDateChange(dayValue, dayIndex)
-                          }
+                          onClick={() => dayValue && handleDateChange(dayValue)}
                           className={[
                             dayValue ? "cell-day" : "other-month",
                             isWeekend ? "weekend" : "",

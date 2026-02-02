@@ -1,15 +1,5 @@
 import styled from "styled-components";
 
-const colors = {
-  primary: "rgba(86, 94, 239, 1)",
-  secondary: "#fff",
-};
-
-const background = {
-  primary: "#fff",
-  secondary: "rgba(86, 94, 239, 1)",
-};
-
 export const PopBrowse = styled.div`
   display: block;
   width: 100%;
