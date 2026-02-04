@@ -19,16 +19,15 @@ import {
   ButtonStyled,
   ButtonLink,
 } from "./Header.styled";
-import { Link, useNavigate } from "react-router";
+import { Link } from "react-router";
 import { TaskContext } from "../../context/TaskContext";
+import { ThemeContext } from "../../context/ThemeContext";
+import { AuthContext } from "../../context/AuthContext";
 
 const Header = ({ openNewCard, closeNewCard }) => {
+  const { user, handleLogout } = useContext(AuthContext);
   const { loading } = useContext(TaskContext);
-  const navigate = useNavigate();
-
-  const handleLogout = () => {
-    navigate("/exit");
-  };
+  const { isDark, toggleTheme } = useContext(ThemeContext);
 
   return (
     <>
@@ -40,12 +39,10 @@ const Header = ({ openNewCard, closeNewCard }) => {
             <Content>
               <Link to="/">
                 <Logo>
-                  <img src="images/logo.png" alt="logo"></img>
-                </Logo>
-              </Link>
-              <Link to="/">
-                <Logo>
-                  <img src="images/logo_dark.png" alt="logo"></img>
+                  <img
+                    src={isDark ? "images/logo_dark.png" : "images/logo.png"}
+                    alt="logo"
+                  />
                 </Logo>
               </Link>
               <Nav>
@@ -54,7 +51,9 @@ const Header = ({ openNewCard, closeNewCard }) => {
                     <Button>Создать новую задачу</Button>
                   </Link>
 
-                  <User href="#user-set-target">Ivan Ivanov</User>
+                  <User href="#user-set-target">
+                    {user?.name || "Пользователь"}
+                  </User>
                   <SetUser
                     className="header__pop-user-set pop-user-set"
                     id="user-set-target"
@@ -62,13 +61,14 @@ const Header = ({ openNewCard, closeNewCard }) => {
                     <CloseButton href="#" onClick={closeNewCard}>
                       x
                     </CloseButton>
-                    <UserName>Ivan Ivanov</UserName>
-                    <UserMail>ivan.ivanov@gmail.com</UserMail>
+                    <UserName>{user?.name || "Пользователь"}</UserName>
+                    <UserMail>{user?.email || ""}</UserMail>
                     <ThemeSection>
                       <ThemeTitle>Темная тема</ThemeTitle>
                       <ThemeCheckbox
                         type="checkbox"
-                        name="checkbox"
+                        checked={isDark}
+                        onChange={toggleTheme}
                       ></ThemeCheckbox>
                     </ThemeSection>
                     <PopUserButton>

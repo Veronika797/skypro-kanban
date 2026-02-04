@@ -11,7 +11,7 @@ const Column = ({ cards, title }) => {
         {Array.isArray(cards) && cards.length ? (
           cards.map((card) => <Card key={card._id} id={card._id} card={card} />)
         ) : (
-          <p>Нет доступных карточек</p>
+          <p className="nocard">Нет доступных карточек</p>
         )}
       </Crds>
     </Col>

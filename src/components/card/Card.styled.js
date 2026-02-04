@@ -12,9 +12,10 @@ const cardAnimation = keyframes`
 `;
 
 export const CardContainer = styled.div`
+  flex: 0 0 auto;
   width: 220px;
   height: 140px;
-  background-color: #ffffff;
+  background-color: ${({ theme }) => theme.cardBg};
   border-radius: 10px;
   display: flex;
   flex-direction: column;
@@ -22,6 +23,8 @@ export const CardContainer = styled.div`
   justify-content: stretch;
   padding: 15px 13px 15px;
   animation: ${cardAnimation} 500ms linear;
+  color: ${({ theme }) => theme.text};
+  border: ${({ theme }) => theme.border};
 
   &:hover {
     cursor: pointer;
@@ -44,30 +47,30 @@ export const Theme = styled.div`
   border-radius: 18px;
 
   &.orange {
-    background-color: #ffe4c2;
+    background-color: #f44336;
   }
 
   &.green {
-    background-color: #b4fdd1;
+    background-color: #4caf50;
   }
 
   &.purple {
-    background-color: #e9d4ff;
+    background-color: #9c27b0;
   }
 
   &.blue {
-    background-color: #7dc1f8;
+    background-color: #3f51b5;
   }
 
   &.pink {
-    background-color: #fbafe4;
+    background-color: #e91e63;
   }
 
   &.yellow {
-    background-color: #fbfb0e;
+    background-color: #8d6e11;
   }
   &.gray {
-    background-color: #d4d4d4;
+    background-color: rgba(148, 166, 190, 1);
   }
 `;
 
@@ -91,7 +94,7 @@ export const Button = styled.button`
     width: 4px;
     height: 4px;
     border-radius: 50%;
-    background-color: #94a6be;
+    background-color: ${({ theme }) => theme.textSecondary};
   }
 `;
 
@@ -99,13 +102,13 @@ export const Title = styled.h3`
   font-size: 14px;
   font-weight: 500;
   line-height: 18px;
-  color: #000000;
+  color: ${({ theme }) => theme.text};
   margin-bottom: 25px;
 `;
 
 export const Description = styled.p`
   font-size: 14px;
-  color: #000000;
+  color: ${({ theme }) => theme.text};
   opacity: 0.5;
 `;
 
@@ -125,7 +128,7 @@ export const DateContainer = styled.div`
 
   svg {
     width: 13px;
-    color: #94a6be;
+    color: ${({ theme }) => theme.textSecondary};
   }
 `;
 
@@ -133,6 +136,6 @@ export const DateContainerText = styled.p`
   margin-left: 6px;
   font-size: 10px;
   line-height: 13px;
-  color: #94a6be;
+  color: ${({ theme }) => theme.textSecondary};
   letter-spacing: 0.2px;
 `;

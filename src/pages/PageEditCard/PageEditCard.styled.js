@@ -1,15 +1,5 @@
 import styled from "styled-components";
 
-const colors = {
-  primary: "rgba(86, 94, 239, 1)",
-  secondary: "#fff",
-};
-
-const background = {
-  primary: "#fff",
-  secondary: "rgba(86, 94, 239, 1)",
-};
-
 export const PopBrowse = styled.div`
   display: block;
   width: 100%;
@@ -19,7 +9,10 @@ export const PopBrowse = styled.div`
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 7;
+  right: 0;
+  bottom: 0;
+  z-index: 1000;
+  overflow: auto;
 `;
 
 export const Container = styled.div`
@@ -37,18 +30,24 @@ export const Container = styled.div`
 export const Block = styled.div`
   display: block;
   margin: 0 auto;
-  background-color: #ffffff;
+  background-color: ${({ theme }) => theme.cardBg};
   max-width: 630px;
   width: 100%;
   padding: 40px 30px 38px;
   border-radius: 10px;
-  border: 0.7px solid #d4dbe5;
+  border: ${({ theme }) => theme.border};
   position: relative;
+
+  @media screen and (max-width: 376px) {
+    position: absolute;
+    top: 70px;
+  }
 `;
 
 export const Content = styled.div`
   display: block;
   text-align: left;
+  color: ${({ theme }) => theme.text};
 `;
 
 export const TopBlock = styled.div`
@@ -63,7 +62,7 @@ export const TopBlock = styled.div`
 `;
 
 export const Title = styled.h3`
-  color: #000;
+  color: ${({ theme }) => theme.text};
   font-size: 20px;
   font-weight: 600;
   line-height: 24px;
@@ -78,30 +77,31 @@ export const Theme = styled.div`
   margin-right: 7px;
 
   &.orange {
-    background-color: #ffe4c2;
+    background-color: #f44336;
   }
 
   &.green {
-    background-color: #b4fdd1;
+    background-color: #4caf50;
   }
 
   &.purple {
-    background-color: #e9d4ff;
+    background-color: #9c27b0;
   }
 
   &.blue {
-    background-color: #7dc1f8;
+    background-color: #3f51b5;
   }
 
   &.pink {
-    background-color: #fbafe4;
+    background-color: #e91e63;
   }
 
   &.yellow {
-    background-color: #fbfb0e;
+    background-color: #8d6e11;
   }
+
   &.gray {
-    background-color: #d4d4d4;
+    background-color: rgba(148, 166, 190, 1);
   }
 
   p {
@@ -118,6 +118,7 @@ export const Status = styled.div`
 
 export const StatusText = styled.p`
   margin-bottom: 14px;
+  color: ${({ theme }) => theme.text};
 `;
 
 export const StatusThemes = styled.div`
@@ -135,7 +136,7 @@ export const StatusTheme = styled.div`
   margin-right: 7px;
   cursor: pointer;
   background-color: transparent;
-  border: 1px solid rgba(148, 166, 190, 0.4);
+  border: ${({ theme }) => theme.border};
 
   p {
     font-size: 14px;
@@ -143,13 +144,13 @@ export const StatusTheme = styled.div`
     line-height: 14px;
     white-space: nowrap;
     margin: 0;
-    color: rgba(148, 166, 190, 1);
+    color: ${({ theme }) => theme.textSecondary};
   }
 
   &._active-category {
-    background: rgba(148, 166, 190, 1);
+    background: ${({ theme }) => theme.textSecondary};
     color: #fff;
-    border: 1px solid rgba(148, 166, 190, 1);
+    border: 1px solid ${({ theme }) => theme.textSecondary};
 
     p {
       font-family: Roboto;
@@ -166,6 +167,11 @@ export const FormWrap = styled.div`
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
+
+  @media screen and (max-width: 376px) {
+    display: flex;
+    flex-direction: column;
+  }
 `;
 
 export const FormContent = styled.form`
@@ -182,11 +188,10 @@ export const FormBlock = styled.div`
 
 export const Textarea = styled.textarea`
   max-width: 370px;
-  width: 100%;
   outline: none;
   padding: 14px;
-  background: #eaeef6;
-  border: 0.7px solid rgba(148, 166, 190, 0.4);
+  background: ${({ theme }) => theme.inputBg};
+  border: ${({ theme }) => theme.border};
   border-radius: 8px;
   font-size: 14px;
   line-height: 1;
@@ -197,18 +202,24 @@ export const Textarea = styled.textarea`
   &::placeholder {
     font-weight: 400;
     font-size: 14px;
-    color: #94a6be;
+    color: ${({ theme }) => theme.textSecondary};
     letter-spacing: -0.14px;
+  }
+
+  @media screen and (max-width: 376px) {
+    height: 37px;
   }
 `;
 export const CategoriesContainer = styled.div`
   margin-bottom: 20px;
 `;
+
 export const CategoriesTitle = styled.p`
   margin-bottom: 14px;
   font-weight: 600;
   line-height: 14px;
   white-space: nowrap;
+  color: ${({ theme }) => theme.text};
 `;
 
 export const CategoriesTheme = styled.div`
@@ -233,20 +244,32 @@ export const ButtonWrapper = styled.div`
   flex-wrap: wrap;
   align-items: flex-start;
   justify-content: space-between;
+
+  @media screen and (max-width: 376px) {
+    display: flex;
+    flex-direction: column;
+  }
 `;
 
 export const ButtonGroup = styled.div`
   display: flex;
+  gap: 8px;
+
+  @media screen and (max-width: 376px) {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
 `;
 
-export const SButton = styled.button`
+export const PrimaryButton = styled.button`
   height: 30px;
   margin-bottom: 10px;
   padding: 0 14px;
-  margin-right: 8px;
-  background-color: rgba(86, 94, 239, 1);
-  border: 0.7px solid rgba(86, 94, 239, 1);
-  color: #fff;
+  background-color: ${({ theme }) => theme.buttonSecondaryBg};
+  border: ${({ theme }) => theme.borderBg};
+  color: ${({ theme }) => theme.buttonPrimaryText};
+
   border-radius: 5px;
   cursor: pointer;
 
@@ -255,16 +278,42 @@ export const SButton = styled.button`
     font-weight: 500;
     font-size: 14px;
     line-height: 10px;
-    text-align: center;
+  }
+
+  @media screen and (max-width: 376px) {
+    width: 100%;
+    height: 48px;
+    font-size: 16px;
+    font-weight: 500;
+    align-self: center;
+    padding-bottom: 0;
+    margin-bottom: 0;
   }
 `;
 
-export const PrimaryButton = styled(SButton)`
-  background-color: ${background.primary};
-  color: ${colors.primary};
-`;
+export const SecondaryButton = styled.button`
+  height: 30px;
+  margin-bottom: 10px;
+  padding: 0 14px;
+  background-color: ${({ theme }) => theme.buttonPrimaryBg};
+  border: none;
+  color: ${({ theme }) => theme.whiteText};
+  border-radius: 5px;
+  cursor: pointer;
 
-export const SecondaryButton = styled(SButton)`
-  background-color: ${background.secondary};
-  color: ${colors.secondary};
+  span {
+    font-family: Roboto;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 10px;
+  }
+
+  @media screen and (max-width: 376px) {
+    width: 100%;
+    height: 48px;
+    font-size: 16px;
+    font-weight: 500;
+    align-self: center;
+    margin-top: 10px;
+  }
 `;

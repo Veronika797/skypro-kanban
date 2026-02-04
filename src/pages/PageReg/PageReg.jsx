@@ -1,22 +1,21 @@
 import { Link, Navigate, useNavigate } from "react-router";
 import {
-  AuthInput,
   Background,
+  ModalWindow,
+  WindowModal,
+  Title,
+  FormModal,
+  InputWrapper,
+  AuthInput,
+  InputPassword,
   ButtonEnter,
   FormGroup,
-  FormModal,
-  InputPassword,
-  InputWrapper,
-  ModalWindow,
-  Title,
-  WindowModal,
 } from "./PageReg.styled";
 import { useContext, useState } from "react";
-import { reg } from "../../services/auth";
 import { AuthContext } from "../../context/AuthContext";
 
 function PageReg() {
-  const { setIsAuth } = useContext(AuthContext);
+  const { handleRegister, setIsAuth } = useContext(AuthContext);
   const navigate = useNavigate();
   const [userName, setUserName] = useState("");
   const [email, setEmail] = useState("");
@@ -27,30 +26,32 @@ function PageReg() {
     return <Navigate to="/" />;
   }
 
-  const handleRegister = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!userName || !email || !password) {
       const errors = {
-        userName: !userName ? "Веедите имя" : "",
-        email: !email ? "Веедите email" : "",
-        password: !password ? "Веедите пароль" : "",
+        userName: !userName ? "Введите имя" : "",
+        email: !email ? "Введите email" : "",
+        password: !password ? "Введите пароль" : "",
       };
       return setTextError(errors);
     }
 
-    reg({ login: email, name: userName, password: password })
-      .then((data) => {
-        console.log(data);
-        localStorage.setItem("token", data.user.token);
-        alert("Регистрация прошла успешно");
-        setIsAuth(true);
-        navigate("/");
-      })
-      .catch((error) => {
-        console.log(error);
-        setTextError({ service: error.response.data.error });
+    try {
+      await handleRegister({
+        login: email,
+        name: userName,
+        password: password,
       });
+      alert("Регистрация прошла успешно");
+      navigate("/");
+    } catch (error) {
+      console.log(error);
+      setTextError({
+        service: error.response?.data?.error || "Ошибка регистрации",
+      });
+    }
   };
 
   return (
@@ -58,7 +59,7 @@ function PageReg() {
       <ModalWindow>
         <WindowModal>
           <Title>Регистрация</Title>
-          <FormModal id="form" onSubmit={handleRegister}>
+          <FormModal id="form" onSubmit={handleSubmit}>
             <InputWrapper>
               <AuthInput
                 style={{
@@ -92,27 +93,26 @@ function PageReg() {
               />
             </InputWrapper>
             {textError.userName && (
-              <p style={{ color: "red" }}>{textError.userName}</p>
+              <p style={{ color: "red", fontSize: "12px" }}>
+                {textError.userName}
+              </p>
             )}
             {textError.email && (
-              <p style={{ color: "red" }}>{textError.email}</p>
+              <p style={{ color: "red", fontSize: "12px" }}>
+                {textError.email}
+              </p>
             )}
             {textError.password && (
-              <p style={{ color: "red" }}>{textError.password}</p>
+              <p style={{ color: "red", fontSize: "12px" }}>
+                {textError.password}
+              </p>
             )}
             {textError.service && (
-              <p style={{ color: "red" }}>{textError.service}</p>
+              <p style={{ color: "red", fontSize: "12px" }}>
+                {textError.service}
+              </p>
             )}
-            <ButtonEnter
-              type="submit"
-              // disabled={
-              //   textError.userName && textError.email && textError.password
-              //     ? false
-              //     : true
-              // }
-            >
-              Зарегистрироваться
-            </ButtonEnter>
+            <ButtonEnter type="submit">Зарегистрироваться</ButtonEnter>
             <FormGroup>
               <p>
                 Уже есть аккаунт?
